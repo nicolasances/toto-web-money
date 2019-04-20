@@ -1,0 +1,36 @@
+
+.toto-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 9px 0;
+}
+
+.toto-menu-item .avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #007c91;
+}
+
+.toto-menu-item .avatar .icon {}
+.toto-menu-item .avatar .icon svg {
+  width: 16px;
+  height: 16px;
+  fill: #007c91;
+}
+
+.toto-menu-item .label {
+  margin-top: 3px;
+  color: #007c91;
+}
+
+/******************** SELECTED *********************/
+.toto-menu-item.selected .avatar {border-color: #ffeb3b;}
+.toto-menu-item.selected .avatar .icon svg {fill: #ffeb3b;}
+.toto-menu-item.selected .label {color: #ffeb3b;}

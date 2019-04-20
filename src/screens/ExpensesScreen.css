@@ -1,0 +1,14 @@
+
+.expenses-screen-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/********************************************************************
+ * LINE 1
+ *******************************************************************/
+.expenses-screen-container .line1 {display: flex; flex-direction: row;}
+.expenses-screen-container .line1 .left {display: flex; flex-direction: column; flex: 1;}
+.expenses-screen-container .line1 .center {display: flex; flex-direction: column;}
+.expenses-screen-container .line1 .right {display: flex; flex-direction: column; flex: 1;}

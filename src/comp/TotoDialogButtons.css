@@ -1,0 +1,7 @@
+
+.toto-dialog-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

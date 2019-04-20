@@ -1,0 +1,61 @@
+
+.toto-dashboard-section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 5px;
+}
+.toto-dashboard-section.empty {
+  background-color: #007c9150;
+}
+
+.section-outer-border {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: none;
+  padding: 0;
+}
+.section-outer-border.empty {
+}
+/* HEADER */
+.toto-dashboard-section .title-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.toto-dashboard-section .title-bar .actions-bar {
+}
+
+.toto-dashboard-section .title {
+  display: flex;
+  flex: 1;
+  font-size: 1.2em;
+  text-align: left;
+  margin-bottom: 12px;
+}
+.toto-dashboard-section.empty .title {
+  opacity: 0.3;
+  font-size: 16px;
+  text-align: center;
+}
+
+.toto-dashboard-section.empty .empty-message {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.toto-dashboard-section.empty .empty-message .empty-image svg {
+  width: 52px;
+  height: 52px;
+  fill: rgba(0,0,0,0.3);
+}
+.toto-dashboard-section.empty .empty-message .message {
+  font-size: 14px;
+  color: rgba(0,0,0,0.3);
+}

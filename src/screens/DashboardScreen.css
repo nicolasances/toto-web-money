@@ -1,0 +1,55 @@
+
+.dashboard-screen {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+/* Sections */
+.dashboard-screen .upload-section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 12px;
+}
+.dashboard-screen .recent-uploads-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-screen .upload-section .inner-container {
+  display: flex;
+  flex-direction: column;
+}
+/* ********** */
+/* UPLOADED DATA AREA */
+/* ********** */
+.dashboard-screen .upload-section .inner-container .uploaded-data-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+/* ********** */
+/* UPLOAD BAR */
+/* ********** */
+.dashboard-screen .upload-section .upload-bar-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+.dashboard-screen .upload-section .upload-bar-container .file-upload-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.dashboard-screen .upload-section .upload-bar-container .bank-selector-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 12px;
+}

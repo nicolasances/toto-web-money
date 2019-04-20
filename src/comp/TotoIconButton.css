@@ -1,0 +1,28 @@
+
+.toto-icon-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 2px solid #ffeb3b;
+  border-radius: 50%;
+}
+.toto-icon-button.disabled {opacity: 0.5;}
+.toto-icon-button.no-border {border: none;}
+
+.toto-icon-button .icon, .toto-icon-button .icon svg {
+  fill: #ffeb3b;
+}
+
+.toto-icon-button.xl {width: 32px; height: 32px;}
+.toto-icon-button.l {width: 28px; height: 28px;}
+.toto-icon-button.m {width: 24px; height: 24px;}
+.toto-icon-button.ms {width: 20px; height: 20px;}
+.toto-icon-button.s {width: 16px; height: 16px;}
+
+.toto-icon-button.xl .icon, .toto-icon-button.xl .icon svg {width: 22px; height: 22px;}
+.toto-icon-button.l .icon, .toto-icon-button.l .icon svg {width: 18px; height: 18px;}
+.toto-icon-button.m .icon, .toto-icon-button.m .icon svg {width: 14px; height: 14px;}
+.toto-icon-button.ms .icon, .toto-icon-button.ms .icon svg {width: 11px; height: 11px;}
+.toto-icon-button.s .icon, .toto-icon-button.s .icon svg {width: 8px; height: 8px;}

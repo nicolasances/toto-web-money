@@ -1,0 +1,51 @@
+
+.bank-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.bank-selector.disabled {
+  opacity: 0.5;
+}
+
+.bank-selector .buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.bank-selector .label {
+  font-size: 1.2em;
+  opacity: 0.7;
+}
+
+.bank-selector .buttons-container .bank-button {
+  display: flex;
+  flex-direction: column;
+  width: 30px;
+  height: 30px;
+  padding: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+  justify-content: center;
+  align-items: center;
+  margin: 0 6px;
+}
+.bank-selector .buttons-container .bank-button .bank-button-label {
+  font-size: 12px;
+}
+.bank-selector .buttons-container .bank-button.unselected {
+  border-color: #007c91;
+}
+.bank-selector .buttons-container .bank-button.selected {
+  border-color: #ffeb3b;
+}
+.bank-selector .buttons-container .bank-button.unselected .bank-button-label {
+  color: #007c91;
+}
+.bank-selector .buttons-container .bank-button.selected .bank-button-label {
+  color: #ffeb3b;
+}

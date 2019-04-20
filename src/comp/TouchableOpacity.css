@@ -1,0 +1,10 @@
+
+.touchable-opacity {
+  transition: opacity 100ms;
+  opacity: 1;
+}
+
+.touchable-opacity.pressed {
+  transition: opacity 100ms;
+  opacity: 0.4;
+}

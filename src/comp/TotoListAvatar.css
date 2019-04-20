@@ -1,0 +1,41 @@
+
+.toto-list-avatar {
+  display: flex;
+  flex-direction: column;
+  width: 24px;
+  height: 24px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+}
+.toto-list-avatar.disabled {
+  opacity: 0.5;
+}
+.toto-list-avatar.selected {
+  background-color: #5ddef4;
+  border-color: #5ddef4;
+}
+
+.toto-list-avatar .icon {
+  width: 16px;
+  height: 16px;
+  fill: rgba(0,0,0,0.6);
+}
+.toto-list-avatar.selected .icon {
+  fill: #00acc1;
+}
+
+.toto-list-avatar .text {
+  width: 18px;
+  height: 18px;
+}
+
+.toto-list-avatar.m {width: 24px; height: 24px;}
+.toto-list-avatar.ms {width: 20px; height: 20px;}
+.toto-list-avatar.s {width: 16px; height: 16px;}
+
+.toto-list-avatar.m .icon {width: 14px; height: 14px;}
+.toto-list-avatar.ms .icon {width: 11px; height: 11px;}
+.toto-list-avatar.s .icon {width: 8px; height: 8px;}
