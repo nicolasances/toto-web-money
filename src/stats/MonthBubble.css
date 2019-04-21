@@ -1,0 +1,18 @@
+
+.month-bubble { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+.month-bubble .bubble {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid #007c91;
+}
+.month-bubble .bubble .currency {}
+.month-bubble .bubble .amount {
+  font-size: 20px;
+}
+.month-bubble .bubble .month {}
