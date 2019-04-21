@@ -3,7 +3,6 @@ import './TotoScreen.css';
 import './DashboardScreen.css';
 
 import TotoDropzone from '../comp/TotoDropzone';
-import TotoDashboardSection from '../comp/TotoDashboardSection';
 import ExpensesUploadedData from '../comp/ExpensesUploadedData';
 import RecentUploads from '../comp/RecentUploads';
 import BankSelector from '../comp/BankSelector';

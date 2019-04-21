@@ -10,10 +10,6 @@ import TotoMenuItem from './TotoMenuItem';
  */
 class TotoMenu extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * Render method
    */
@@ -21,8 +17,8 @@ class TotoMenu extends Component {
     return (
       <div style={styles.menu}>
         <TotoMenuLogo />
-        <TotoMenuItem label='Import' target='/' image={require('../img/import.svg')} selected={this.props.location.pathname == '/'} />
-        <TotoMenuItem label='Expenses' target='/expenses' image={require('../img/chart.svg')} selected={this.props.location.pathname == '/expenses'} />
+        <TotoMenuItem label='Import' target='/' image={require('../img/import.svg')} selected={this.props.location.pathname === '/'} />
+        <TotoMenuItem label='Expenses' target='/expenses' image={require('../img/chart.svg')} selected={this.props.location.pathname === '/expenses'} />
         <div style={{display: 'flex', flex: 1}}></div>
         <TotoMenuItem label='Logout' onPress={this.props.onSignOut} image={require('../img/logout.svg')} />
       </div>

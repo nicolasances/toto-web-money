@@ -96,19 +96,19 @@ class Item extends Component {
       // Avatar size
       let avatarSize = data.avatar.size ? data.avatar.size : 'm';
       // Text
-      if (data.avatar.type == 'text') {
+      if (data.avatar.type === 'text') {
         avatar = (<TotoListAvatar text={data.avatar.value} size={avatarSize} />)
       }
       // Number
-      if (data.avatar.type == 'number') {
+      if (data.avatar.type === 'number') {
         avatar = (<TotoListAvatar text={data.avatar.value} size={avatarSize} />)
       }
       // Image
-      else if (data.avatar.type == 'image') {
+      else if (data.avatar.type === 'image') {
         avatar = (<TotoListAvatar image={data.avatar.value} size={avatarSize} />)
       }
       // Select
-      else if (data.avatar.type == 'select') {
+      else if (data.avatar.type === 'select') {
         avatar = (<TotoListAvatar text='' selected={this.props.item.selected} size={avatarSize} onPress={this.onItemAvatarClick} />)
       }
     }

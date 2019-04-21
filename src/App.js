@@ -87,7 +87,7 @@ class App extends Component {
       <div className="toto-login" >
         <div className="toto-login-button" onClick={this.signIn}>
           <div className="sign-in">Login</div>
-          <img className="logo" src={googleLogo} />
+          <img className="logo" src={googleLogo} alt="google-logo" />
         </div>
       </div>
     );
