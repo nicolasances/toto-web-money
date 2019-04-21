@@ -152,6 +152,7 @@ export default class GraphPastDaysExpenses extends Component {
             maxHeight={100}
             valueLabelTransform={this.valueLabel}
             xAxisTransform={this.xAxisTransform}
+            margins={{ horizontal: 24, vertical: 24}}
             />
       </div>
     )

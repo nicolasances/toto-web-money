@@ -39,7 +39,11 @@ import './TotoLineChart.css';
  *                              area          : color, default 'none'
  *                              value         : color for the value text, default TEXT
  *                            }
- */
+ * - margins                : (optional) margins to be applied. It's an object {
+ *                              horizontal    : horizontal margin (number, e.g. 12)
+ *                              vertical      : vertical margin
+ *                            }
+*/
 export default class TotoLineChart extends Component {
 
   constructor(props) {
@@ -63,6 +67,7 @@ export default class TotoLineChart extends Component {
     // Margins
     this.marginV = 12;
     this.marginH = 12;
+    if (this.props.margins) { this.marginH = this.props.margins.horizontal; this.marginV = this.props.margins.vertical; }
     if (this.props.xAxisTransform) this.marginV += 6;
 
     // Text margins

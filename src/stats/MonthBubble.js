@@ -60,7 +60,7 @@ export default class MonthBubble extends Component {
     new ExpensesAPI().getMonthTotalSpending(this.state.user.email, this.state.yearMonth, targetCurrency).then((data) => {
 
       // Animate
-      this.setState({spending: 1200});
+      this.setState({spending: data.total});
 
     });
   }
@@ -77,7 +77,7 @@ export default class MonthBubble extends Component {
       <div className='month-bubble'>
         <div className='bubble'>
           <div className='currency'>{currency}</div>
-          <div className='amount'>{this.state.spending.toLocaleString('it')}</div>
+          <div className='amount'>{Math.round(this.state.spending, 0).toLocaleString('it')}</div>
           <div className='month'>{this.state.month}</div>
         </div>
       </div>

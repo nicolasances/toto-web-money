@@ -29,12 +29,16 @@ import './TotoBarChart.css';
  *                         it's an [{x, y}, {x, y}, ...]
  *                         note that the x axis is the same as the one used for the barchart, so it follows the same scale
  * - overlayMinY         : UNSUPPORTED (optional) the minimum y value to consider as the "lowest" value of the overlay line, when defining the SCALE
- * - theme                  : (optional, default the standard colors) it is an object {
- *                              background    : color, default THEME
- *                              bar           : color, default THEME_DARK
- *                              value         : color for the value text, default TEXT
- *                              xLabel        : color for the x label, default THEME_LIGHT
- *                            }
+ * - theme               : (optional, default the standard colors) it is an object {
+ *                            background    : color, default THEME
+ *                            bar           : color, default THEME_DARK
+ *                            value         : color for the value text, default TEXT
+ *                            xLabel        : color for the x label, default THEME_LIGHT
+ *                          }
+ * - margins              : (optional) margins to be applied. It's an object {
+ *                            horizontal    : horizontal margin (number, e.g. 12)
+ *                            vertical      : vertical margin
+ *                          }
  */
 export default class TotoBarChart extends Component {
 
@@ -63,6 +67,8 @@ export default class TotoBarChart extends Component {
     // Margins
     this.marginH = 12;
     this.marginV = 12;
+    // Override defaults if props.margins is passed
+    if (this.props.margins) { this.marginH = this.props.margins.horizontal; this.marginV = this.props.margins.vertical; }
     if (this.props.xAxisTransform) this.marginV += 6;
 
     // Text margins
