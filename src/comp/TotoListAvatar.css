@@ -19,11 +19,12 @@
 }
 
 .toto-list-avatar .icon {
-  width: 16px;
-  height: 16px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.toto-list-avatar .icon svg {
   fill: rgba(0,0,0,0.6);
 }
-.toto-list-avatar.selected .icon {
+.toto-list-avatar.selected .icon  svg{
   fill: #00acc1;
 }
 
@@ -32,10 +33,12 @@
   height: 18px;
 }
 
+.toto-list-avatar.l {width: 28px; height: 28px;}
 .toto-list-avatar.m {width: 24px; height: 24px;}
 .toto-list-avatar.ms {width: 20px; height: 20px;}
 .toto-list-avatar.s {width: 16px; height: 16px;}
 
-.toto-list-avatar.m .icon {width: 14px; height: 14px;}
-.toto-list-avatar.ms .icon {width: 11px; height: 11px;}
-.toto-list-avatar.s .icon {width: 8px; height: 8px;}
+.toto-list-avatar.l .icon, .toto-list-avatar.l .icon div, .toto-list-avatar.l .icon svg {width: 16px; height: 16px;}
+.toto-list-avatar.m .icon, .toto-list-avatar.m .icon div, .toto-list-avatar.m .icon svg {width: 12px; height: 12px;}
+.toto-list-avatar.ms .icon, .toto-list-avatar.ms .icon div, .toto-list-avatar.ms .icon svg {width: 10px; height: 10px;}
+.toto-list-avatar.s .icon, .toto-list-avatar.s .icon div, .toto-list-avatar.s .icon svg {width: 8px; height: 8px;}

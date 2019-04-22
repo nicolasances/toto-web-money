@@ -9,7 +9,11 @@
 /********************************************************************
  * LINE 1
  *******************************************************************/
-.expenses-screen-container .line1 {display: flex; flex-direction: row;}
+.expenses-screen-container .line1 {display: flex; flex-direction: row; height: 25vh; align-items: center}
 .expenses-screen-container .line1 .left {display: flex; flex-direction: column; flex: 1;}
 .expenses-screen-container .line1 .center {display: flex; flex-direction: column;}
 .expenses-screen-container .line1 .right {display: flex; flex-direction: column; flex: 1;}
+
+.expenses-screen-container .line2 {display: flex; flex: 1; flex-direction: row; height: 75vh;}
+.expenses-screen-container .line2 .left {display: flex; flex-direction: row; flex: 1; max-width: 60%; }
+.expenses-screen-container .line2 .right {display: flex; flex-direction: column; flex: 1; max-width: 40%; }

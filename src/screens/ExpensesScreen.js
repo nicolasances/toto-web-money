@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import GraphPastDaysExpenses from '../stats/GraphPastDaysExpenses';
 import GraphPastMonthsExpenses from '../stats/GraphPastMonthsExpenses';
 import MonthBubble from '../stats/MonthBubble';
+import ExpensesListWidget from '../widgets/ExpensesListWidget';
 
 import './ExpensesScreen.css';
 
@@ -12,9 +13,13 @@ export default class ExpensesScreen extends Component {
     return (
       <div className="expenses-screen-container">
         <div className="line1">
-          <div className="left"><GraphPastDaysExpenses /></div>
-          <div className="center"><MonthBubble /></div>
-          <div className="right"><GraphPastMonthsExpenses /></div>
+          <div className="left"> <GraphPastDaysExpenses /> </div>
+          <div className="center"> <MonthBubble /> </div>
+          <div className="right"> <GraphPastMonthsExpenses /> </div>
+        </div>
+        <div className="line2">
+          <div className="left"></div>
+          <div className="right"> <ExpensesListWidget /> </div>
         </div>
       </div>
     )

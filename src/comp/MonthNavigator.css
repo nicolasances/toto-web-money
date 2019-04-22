@@ -1,0 +1,19 @@
+
+.month-navigator { display: flex; flex-direction: row; flex: 1; align-items: center; }
+
+.month-navigator .left { display: flex; flex-direction: column; flex: 1; }
+.month-navigator .center {
+  display: flex; flex-direction: column;
+  margin: 0 24px;
+  width: 100px;
+}
+.month-navigator .right { display: flex; flex-direction: column; flex: 1; }
+
+.month-navigator .center .month {
+  font-size: 18px;
+  text-align: center;
+}
+.month-navigator .center .year {
+  font-size: 10px;
+  text-align: center;
+}
