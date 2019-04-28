@@ -1,0 +1,10 @@
+
+.toto-input {}
+
+.toto-input .text-input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.toto-input .text-input.placeholder { opacity: 0.5; }

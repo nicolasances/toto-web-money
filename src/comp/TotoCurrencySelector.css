@@ -1,0 +1,56 @@
+
+.toto-currency-selector { display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; }
+.toto-currency-selector:hover { color: #00acc1; }
+
+.toto-currency-selector .popup {
+  background-color: #007c91;
+  color: rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+}
+.toto-currency-selector .popup .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #5ddef4;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.toto-currency-selector .popup .currencies-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.toto-currency-selector .popup .curr-button {
+  display: flex;
+  flex-direction: column;
+  width: 30px;
+  height: 30px;
+  padding: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+  justify-content: center;
+  align-items: center;
+  margin: 0 6px;
+}
+.toto-currency-selector .popup .curr-button .curr-button-label {
+  font-size: 12px;
+}
+.toto-currency-selector .popup .curr-button.unselected {
+  border-color: currentColor;
+}
+.toto-currency-selector .popup .curr-button.selected {
+  border-color: #ffeb3b;
+}
+.toto-currency-selector .popup .curr-button.unselected .curr-button-label {
+  color: currentColor;
+}
+.toto-currency-selector .popup .curr-button.selected .curr-button-label {
+  color: #ffeb3b;
+}

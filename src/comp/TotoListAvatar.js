@@ -20,6 +20,7 @@ export default class TotoListAvatar extends Component {
 
     let buttonClass = "toto-list-avatar";
     if (this.props.size) buttonClass += ' ' + this.props.size;
+    else buttonClass += ' m';
     if (this.props.selected) buttonClass += ' selected';
 
     let svgClass = 'icon';
