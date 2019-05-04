@@ -120,4 +120,29 @@ export default class ExpensesAPI {
 
   }
 
+  /**
+   * Retrieves the spending categories per month since yearMonthGte
+   */
+  getTopSpendingCategoriesPerMonth(userEmail, yearMonthGte, targetCurrency) {
+
+    let targetCurrencyFilter = targetCurrency ? '&targetCurrency=' + targetCurrency : ''
+
+    return new TotoAPI().fetch('/expenses/stats/topCategoriesPerMonth?user=' + userEmail + '&yearMonthGte=' + yearMonthGte + targetCurrencyFilter)
+        .then((response) => response.json());
+
+  }
+
+  /**
+   * Retrieves the spending categories for the specified month
+   */
+  getTopSpendingCategoriesOfMonth(userEmail, yearMonth, maxCategories, targetCurrency) {
+
+    let maxCatFilter = maxCategories ? '&maxCategories=' + maxCategories :'';
+    let targetCurrencyFilter = targetCurrency ? '&targetCurrency=' + targetCurrency : ''
+
+    return new TotoAPI().fetch('/expenses/stats/topCategoriesOfMonth?user=' + userEmail + '&yearMonth=' + yearMonth + maxCatFilter + targetCurrencyFilter)
+        .then((response) => response.json());
+
+  }
+
 }

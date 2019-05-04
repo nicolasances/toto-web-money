@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import GraphPastDaysExpenses from '../stats/GraphPastDaysExpenses';
 import GraphPastMonthsExpenses from '../stats/GraphPastMonthsExpenses';
 import GraphPastYearsExpenses from '../stats/GraphPastYearsExpenses';
+import GraphTopCategoriesPerMonth from '../stats/GraphTopCategoriesPerMonth';
+import GraphTopCategoriesOfMonth from '../stats/GraphTopCategoriesOfMonth';
 import MonthBubble from '../stats/MonthBubble';
 import ExpensesListWidget from '../widgets/ExpensesListWidget';
 import QuickExpense from '../widgets/QuickExpense';
@@ -23,12 +25,12 @@ export default class ExpensesScreen extends Component {
           <div className="left">
             <div className="line1">
               <div className="left">
-                <div className="line1"><GraphPastYearsExpenses /></div>
-                <div className="line2"><QuickExpense /></div>
+                <div className="line1"> <GraphPastYearsExpenses /> </div>
+                <div className="line2"> <QuickExpense /> </div>
               </div>
-              <div className="right"></div>
+              <div className="right"> <GraphTopCategoriesOfMonth /> </div>
             </div>
-            <div className="line2"> </div>
+            <div className="line2"> <GraphTopCategoriesPerMonth /> </div>
           </div>
           <div className="right"> <ExpensesListWidget /> </div>
         </div>

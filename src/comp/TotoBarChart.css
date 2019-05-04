@@ -1,2 +1,4 @@
 
-.toto-bar-chart {  }
+.toto-bar-chart { display: flex; flex: 1; position: relative; }
+
+.toto-bar-chart .image svg { width: 100%; height: 100%; fill: currentColor; }

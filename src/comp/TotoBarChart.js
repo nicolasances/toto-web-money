@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
+import SVG from 'react-svg';
 
 import './TotoBarChart.css';
 
@@ -11,8 +12,9 @@ import './TotoBarChart.css';
  *                            y: numeric, y value,
  *                            temporary: boolean, optional, if true will highlight this element as a temporary one
  *                          }, {...} ]
- * - valueLabelTransform : UNSUPPORTED (optional) a function, optional, (value) => {transforms the value to be displayed on the bar (top part)}
- * - xAxisTransform      : UNSUPPORTED (optional, default null) a function to be called with the x axis value to generate a label to put on the bar (bottom part)
+ * - valueLabelTransform : (optional) a function(value) => {transforms the value to be displayed on the bar (top part)}
+ * - valueImage          : (optional) a function(value) => {svg image to display}
+ * - xAxisTransform      : (optional, default null) a function to be called with the x axis value to generate a label to put on the bar (bottom part)
  * - xLabelImgLoader     : UNSUPPORTED (optional, default null) a function(datum) => {return the image to be put as an Image source}. This allows to put an image instead of text as a x axis label
  * - xLabelMode          : UNSUPPORTED (optional) specifies the mode in which the x labels are shown:
  *                           - if 'when-changed' the x label is shown only when the value changes
@@ -39,6 +41,7 @@ import './TotoBarChart.css';
  *                            horizontal    : horizontal margin (number, e.g. 12)
  *                            vertical      : vertical margin
  *                          }
+ * - maxHeight            : (optional) max height of the chart
  */
 export default class TotoBarChart extends Component {
 
@@ -63,6 +66,7 @@ export default class TotoBarChart extends Component {
     this.height = document.getElementById(this.compId).offsetHeight;
     if (this.height === 0) this.height = 250;
     if (this.props.maxHeight && this.height > this.props.maxHeight) this.height = this.props.maxHeight;
+
 
     // Margins
     this.marginH = 12;
@@ -104,6 +108,7 @@ export default class TotoBarChart extends Component {
     // Update the scales
     this.x = d3.scaleBand().paddingInner(0.05).range([this.marginH, this.width - this.marginH]).domain(data.map((d) => {return d.x}));
     this.y = d3.scaleLinear().range([this.textPaddingV, this.height - this.textPaddingV]).domain([0, this.yMax]);
+    this.fontScale = d3.scaleLinear().range([6, 11]).domain([24, 4]);
 
     // Lines
     this.createBars(data);
@@ -146,7 +151,7 @@ export default class TotoBarChart extends Component {
       .attr('x', (d) => {return this.x(d.x) + this.x.bandwidth() / 2})
       .attr('y', this.height - 6)
       .attr('fill', this.theme.xLabel)
-      .attr('font-size', 10)
+      .attr('font-size', this.fontScale(data.length))
       .style('text-anchor', 'middle')
       .text((d) => {return this.props.xAxisTransform(d.x)})
 
@@ -164,9 +169,35 @@ export default class TotoBarChart extends Component {
       .attr('x', (d) => {return this.x(d.x) + this.x.bandwidth() / 2})
       .attr('y', (d) => {return this.height - this.y(d.y) - 6})
       .attr('fill', this.theme.value)
-      .attr('font-size', 10)
+      .attr('font-size', this.fontScale(data.length))
       .style('text-anchor', 'middle')
       .text((d) => {return this.props.valueLabelTransform(d.y)})
+
+  }
+
+  /**
+   * Creates the images to be displayed
+   */
+  createImages(data) {
+
+    if (!data || data.length === 0) return;
+
+    var images = data.map((item, index) => {
+
+      let size = 12;
+      let xLabelHeight = (this.props.xAxisTransform ? 6 + this.fontScale(data.length) : 0)
+      let valueLabelPos = this.height - this.y(item.y) - 6;
+      let color = this.theme.xLabel;
+
+      let posx = this.x(item.x) + this.x.bandwidth() / 2 - size / 2;
+      let posy = this.height - 6 - xLabelHeight - size;
+
+      if (xLabelHeight + size + 6 >= this.y(item.y)) posy = valueLabelPos - this.fontScale(data.length) - 18;
+
+      return (<SVG style={{position: 'absolute', color: color, left: posx, top: posy, width: size + 'px', height: size + 'px'}} src={this.props.valueImage(item, index)} className='image'/>)
+    });
+
+    return images;
 
   }
 
@@ -174,8 +205,12 @@ export default class TotoBarChart extends Component {
 
     this.createGraph(this.props.data);
 
+    let images;
+    if (this.props.valueImage) images = this.createImages(this.props.data);
+
     return (
       <div id={this.compId} className="toto-bar-chart">
+        {images}
       </div>
     )
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import TotoListAvatar from './TotoListAvatar';
 
@@ -16,6 +17,7 @@ import './TotoList.css';
  *                            },
  *                            date  :   a date, if any, to display. It's an {} in the following form: {
  *                              yearMonth : a date in a yearMonth format
+ *                              date      : a date in YYYYMMDD format (string)
  *                            },
  *                            title :   the main text to be displayed on the row
  *                            amount :  an amount to display (typically at the end of the row)
@@ -119,6 +121,15 @@ class Item extends Component {
       // In case of a yearMonth
       if (data.date.yearMonth) {
         date = (<div className='yearMonth'>{data.date.yearMonth}</div>)
+      }
+      // In case of date YYYYMMDD
+      else if (data.date.date) {
+        date = (
+          <div className='dayMonth'>
+            <div className='day'>{moment(data.date.date, 'YYYYMMDD').format('DD')}</div>
+            <div className='month'>{moment(data.date.date, 'YYYYMMDD').format('MMM')}</div>
+          </div>
+        )
       }
     }
 

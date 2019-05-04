@@ -16,10 +16,11 @@
   align-items: center;
 }
 
-.toto-list .item .yearMonth {
-  margin-left: 12px;
-  width: 50px;
-}
+.toto-list .item .yearMonth { margin-left: 12px; width: 50px; }
+.toto-list .item .dayMonth { margin-left: 12px; text-align: center; }
+.toto-list .item .dayMonth .day { font-size: 1.1em;}
+.toto-list .item .dayMonth .month { font-size: 0.7em; text-transform: uppercase;}
+
 .toto-list .item .item-title {
   display: flex;
   flex: 1;

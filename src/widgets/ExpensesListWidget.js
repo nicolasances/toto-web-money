@@ -94,6 +94,7 @@ export default class ExpensesListWidget extends Component {
         value: categoriesMap.get(item.category).image,
         size: 'l'
       },
+      date: {date: item.date},
       title: item.description,
       amount: currency + ' ' + item.amount.toLocaleString('it')
     }
