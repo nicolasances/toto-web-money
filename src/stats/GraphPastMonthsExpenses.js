@@ -4,8 +4,8 @@ import moment from 'moment';
 
 import TotoBarChart from '../comp/TotoBarChart';
 import ExpensesAPI from '../services/ExpensesAPI';
-
-import './GraphPastMonthsExpenses.css';
+import TotoEventBus from '../services/TotoEventBus';
+import * as config from '../Config';
 
 const cookies = new Cookies();
 
@@ -30,6 +30,7 @@ export default class GraphPastMonthsExpenses extends Component {
     // this.valueLabel = this.valueLabel.bind(this);
     this.loadExpenses = this.loadExpenses.bind(this);
     this.xAxisTransform = this.xAxisTransform.bind(this);
+    this.onExpenseCreated = this.onExpenseCreated.bind(this);
 
   }
 
@@ -41,9 +42,24 @@ export default class GraphPastMonthsExpenses extends Component {
     // Load
     this.load();
 
+    // Subscriptions
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+
   }
 
   componentWillUnmount() {
+
+    // Subscriptions
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+  }
+
+  /**
+   * When an expense is created, reload
+   */
+  onExpenseCreated(event) {
+
+    this.loadExpenses();
+
   }
 
   /**
