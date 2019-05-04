@@ -1,0 +1,42 @@
+
+.category-selection-popup { display: flex; flex-direction: column; padding: 12px;}
+
+.category-selection-popup .title { display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 12px; color: #5ddef4 }
+.category-selection-popup .buttons-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-selection-popup .cat-selector-container {
+  display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+  flex-wrap: wrap;
+  margin: 12px;
+  width: 60px;
+  color: rgba(0,0,0,0.3);
+}
+.category-selection-popup .cat-selector-container.selected {
+  color: #ffeb3b;
+}
+
+.category-selection-popup .cat-selector-container .image-container {
+  display: flex; flex-direction: row; justify-content: center; align-items: center;
+  width: 42px; height: 42px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+.category-selection-popup .cat-selector-container .image-container .image, .category-selection-popup .cat-selector-container .image-container .image div {
+  width: 24px; height: 24px;
+}
+.category-selection-popup .cat-selector-container .image-container .image svg {
+  width: 24px; height: 24px;
+  fill: currentColor;
+}
+.category-selection-popup .cat-selector-container .label {
+  color: currentColor;
+  text-align: center;
+  margin-top: 6px;
+  width: 60px;
+  word-wrap: break-word;
+}

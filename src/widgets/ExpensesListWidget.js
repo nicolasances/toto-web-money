@@ -6,6 +6,8 @@ import MonthNavigator from '../comp/MonthNavigator';
 import ExpensesAPI from '../services/ExpensesAPI';
 import TotoList from '../comp/TotoList';
 import categoriesMap from '../services/CategoriesMap';
+import TotoEventBus from '../services/TotoEventBus';
+import * as config from '../Config';
 
 import './ExpensesListWidget.css';
 
@@ -23,6 +25,7 @@ export default class ExpensesListWidget extends Component {
 
     // Bindings
     this.onMonthChange = this.onMonthChange.bind(this);
+    this.onExpenseCreated = this.onExpenseCreated.bind(this);
     this.reload = this.reload.bind(this);
 
   }
@@ -33,6 +36,18 @@ export default class ExpensesListWidget extends Component {
   componentDidMount() {
 
     this.reload();
+
+    // Subscriptions
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+  }
+
+  /**
+   * When unmounting
+   */
+  componentWillUnmount() {
+
+    // Subscriptions
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
   }
 
   /**
@@ -52,6 +67,15 @@ export default class ExpensesListWidget extends Component {
   onMonthChange(yearMonth) {
 
     this.setState({yearMonth: yearMonth}, this.reload)
+
+  }
+
+  /**
+   * When an expense is created, reload
+   */
+  onExpenseCreated(event) {
+
+    this.reload();
 
   }
 
