@@ -43,7 +43,7 @@ export default class TotoCurrencySelector extends Component {
         <Popup
           trigger={displayedCurrency}
           on='click'
-          position='center'
+          position='top center'
           closeOnDocumentClick={true}
           closeOnEscape={true}
           overlayStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
@@ -53,8 +53,8 @@ export default class TotoCurrencySelector extends Component {
           <div className='popup'>
             <div className='title'>Select a currency</div>
             <div className='currencies-container'>
-              <CurrencyButton text='EUR' selected={this.state.value == 'EUR'} onPress={() => {this.selectCurrency('EUR')}} />
-              <CurrencyButton text='DKK' selected={this.state.value == 'DKK'} onPress={() => {this.selectCurrency('DKK')}} />
+              <CurrencyButton text='EUR' selected={this.state.value === 'EUR'} onPress={() => {this.selectCurrency('EUR')}} />
+              <CurrencyButton text='DKK' selected={this.state.value === 'DKK'} onPress={() => {this.selectCurrency('DKK')}} />
             </div>
           </div>
         </Popup>

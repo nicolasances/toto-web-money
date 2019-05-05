@@ -54,7 +54,7 @@ export default class TotoInput extends Component {
   onBlur() {
 
     let placeholder = '';
-    if (this.state.value == '' || this.state.value > 0) placeholder = this.props.placeholder;
+    if (this.state.value === '' || this.state.value > 0) placeholder = this.props.placeholder;
 
     this.setState({placeholder: placeholder});
 
@@ -66,10 +66,10 @@ export default class TotoInput extends Component {
     // Input text classes
     let inputClass = 'text-input';
     // Placeholder class
-    if (this.state.value == '') inputClass += ' placeholder';
+    if (this.state.value === '') inputClass += ' placeholder';
 
     // Value
-    let value = this.state.value != '' ? this.state.value : this.state.placeholder
+    let value = this.state.value !== '' ? this.state.value : this.state.placeholder
 
     // Additional text styles
     let textStyles = {};

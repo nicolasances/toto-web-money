@@ -24,8 +24,10 @@ export default class ExpensesListWidget extends Component {
     }
 
     // Bindings
+    this.dataExtractor = this.dataExtractor.bind(this);
     this.onMonthChange = this.onMonthChange.bind(this);
     this.onExpenseCreated = this.onExpenseCreated.bind(this);
+    this.onReconcilePress = this.onReconcilePress.bind(this);
     this.reload = this.reload.bind(this);
 
   }
@@ -80,13 +82,35 @@ export default class ExpensesListWidget extends Component {
   }
 
   /**
+   * When an item's reconcile button is pressed
+   */
+  onReconcilePress(item) {
+
+    // 1. Reconcile
+    new ExpensesAPI().consolidateExpense(item.id).then((data) => {
+
+      // 2. Reload
+      this.reload();
+
+    })
+
+  }
+
+  /**
    * Extractor
    */
   dataExtractor(item) {
 
     let currency = item.currency;
-    if (item.currency == 'EUR') currency = '€';
-    else if (item.currency == 'DKK') currency = 'kr.'
+    if (item.currency === 'EUR') currency = '€';
+    else if (item.currency === 'DKK') currency = 'kr.'
+
+    // Highlights
+    let highlights = [];
+    if (!item.consolidated) highlights.push({
+      image: require('../img/reconcile.svg'),
+      onPress: this.onReconcilePress
+    })
 
     return {
       avatar: {
@@ -96,7 +120,8 @@ export default class ExpensesListWidget extends Component {
       },
       date: {date: item.date},
       title: item.description,
-      amount: currency + ' ' + item.amount.toLocaleString('it')
+      amount: currency + ' ' + item.amount.toLocaleString('it'),
+      highlights: highlights
     }
 
   }

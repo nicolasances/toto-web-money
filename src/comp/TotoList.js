@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import SVG from 'react-svg';
+import TouchableOpacity from './TouchableOpacity';
 
 import TotoListAvatar from './TotoListAvatar';
 
@@ -10,17 +12,22 @@ import './TotoList.css';
  * Properties:
  * - data                 : (mandatory) the data to be provided as an []
  * - dataExtractor        : (mandatory) the data extractor. A (items) => {} that will return an object:
- *                          { avatar  : {
- *                              type :  the type of avatar: 'image', 'text', 'number', 'select' (selectable radio button)
- *                              value:  the value to display in the avatar. Based on the type, can be an image, text, etc.
- *                              size :  the size of the avatar. Can be 's', 'ms', 'm', 'l', 'xl'
- *                            },
- *                            date  :   a date, if any, to display. It's an {} in the following form: {
- *                              yearMonth : a date in a yearMonth format
- *                              date      : a date in YYYYMMDD format (string)
- *                            },
- *                            title :   the main text to be displayed on the row
- *                            amount :  an amount to display (typically at the end of the row)
+ *                          { avatar  :     {
+ *                                            type :      the type of avatar: 'image', 'text', 'number', 'select' (selectable radio button)
+ *                                            value:      the value to display in the avatar. Based on the type, can be an image, text, etc.
+ *                                            size :      the size of the avatar. Can be 's', 'ms', 'm', 'l', 'xl'
+ *                                          },
+ *                            date  :       a date, if any, to display. It's an {} in the following form: {
+ *                                            yearMonth : a date in a yearMonth format
+ *                                            date      : a date in YYYYMMDD format (string)
+ *                                           },
+ *                            title :       the main text to be displayed on the row
+ *                            amount :      an amount to display (typically at the end of the row),
+ *                            highlights :  an array of highlights, which are actions to be done on the item.
+ *                                          each highlight is a {
+ *                                            image     : image url (svg)
+ *                                            onPress   : an onPress() callback function
+ *                                          }
  *                          }
  * - onAvatarClick        : (optional) function(item, selected) invoked when the avatar is clicked.
  *                          The function will receive the item clicked and the indication if it is selected or unselected
@@ -145,12 +152,25 @@ class Item extends Component {
       amount = (<div className='item-amount'>{data.amount}</div>)
     }
 
+    // Highlights
+    let highlights;
+    if (data.highlights) {
+      highlights = (
+        <div className='highlights'>
+          {data.highlights.map((item, index) => {
+            return (<TouchableOpacity key={'TotoList-Highlight-' + Math.random()} onPress={() => {item.onPress(this.props.item)}}><SVG src={item.image} /></TouchableOpacity>)
+          })}
+        </div>
+      )
+    }
+
     return (
       <div className='item'>
         {avatar}
         {date}
         {title}
         {amount}
+        {highlights}
       </div>
     )
   }

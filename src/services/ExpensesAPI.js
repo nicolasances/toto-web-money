@@ -145,4 +145,20 @@ export default class ExpensesAPI {
 
   }
 
+  /**
+   * Marks an expense as conolidated
+   */
+  consolidateExpense(exId) {
+
+    // Post the data
+    return new TotoAPI().fetch('/expenses/expenses/' + exId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({consolidated: true})
+    }).then((response => response.json()));
+
+  }
+
 }

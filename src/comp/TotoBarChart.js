@@ -194,7 +194,7 @@ export default class TotoBarChart extends Component {
 
       if (xLabelHeight + size + 6 >= this.y(item.y)) posy = valueLabelPos - this.fontScale(data.length) - 18;
 
-      return (<SVG style={{position: 'absolute', color: color, left: posx, top: posy, width: size + 'px', height: size + 'px'}} src={this.props.valueImage(item, index)} className='image'/>)
+      return (<SVG key={'TotoBarImg-' + index} style={{position: 'absolute', color: color, left: posx, top: posy, width: size + 'px', height: size + 'px'}} src={this.props.valueImage(item, index)} className='image'/>)
     });
 
     return images;

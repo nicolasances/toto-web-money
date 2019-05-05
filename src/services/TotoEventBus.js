@@ -34,7 +34,7 @@ class Bus {
     if (callbacks == null) return;
 
     for (var i = 0; i < callbacks.length; i++) {
-      if (callbacks[i] == callback) {
+      if (callbacks[i] === callback) {
         callbacks.splice(i, 1);
         return;
       }

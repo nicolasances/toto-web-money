@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
 
 import TotoBarChart from '../comp/TotoBarChart';
 import ExpensesAPI from '../services/ExpensesAPI';
@@ -138,8 +137,8 @@ export default class GraphPastYearsExpenses extends Component {
 
     let targetCurrency = this.state.settings ? this.state.settings.currency : 'EUR';
     let currency = targetCurrency;
-    if (targetCurrency == 'EUR') currency = '€';
-    else if (targetCurrency == 'DKK') currency = 'kr.';
+    if (targetCurrency === 'EUR') currency = '€';
+    else if (targetCurrency === 'DKK') currency = 'kr.';
 
     return currency + ' ' + Math.round(value,0).toLocaleString('it');
   }

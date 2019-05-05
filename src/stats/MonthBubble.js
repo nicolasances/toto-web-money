@@ -84,7 +84,7 @@ export default class MonthBubble extends Component {
     // Define the currency
     let currency = '€';
     if (this.state.settings && this.state.settings.currency) {
-      if (this.state.settings.currency == 'DKK') currency = 'kr.';
+      if (this.state.settings.currency === 'DKK') currency = 'kr.';
     }
 
     return (

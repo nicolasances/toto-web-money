@@ -29,3 +29,6 @@
 .toto-list .item .item-amount {
   margin-left: 12px;
 }
+
+.toto-list .item .highlights {}
+.toto-list .item .highlights svg { width: 18px; height: 18px; margin-left: 12px; fill: #ffeb3b; }

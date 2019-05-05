@@ -128,8 +128,8 @@ export default class GraphTopCategoriesOfMonth extends Component {
 
     let targetCurrency = this.state.settings ? this.state.settings.currency : 'EUR';
     let currency = targetCurrency;
-    if (targetCurrency == 'EUR') currency = '€';
-    else if (targetCurrency == 'DKK') currency = 'kr.';
+    if (targetCurrency === 'EUR') currency = '€';
+    else if (targetCurrency === 'DKK') currency = 'kr.';
 
     return currency + ' ' + Math.round(value,0).toLocaleString('it');
   }

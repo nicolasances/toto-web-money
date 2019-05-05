@@ -1,0 +1,22 @@
+
+.toto-date-input { text-align: center; cursor: pointer; }
+.toto-date-input .day {font-size: 1.1em;}
+.toto-date-input .month {font-size: 0.8em; text-transform: uppercase;}
+
+.toto-date-input-calendar { }
+.toto-date-input-calendar .react-calendar__navigation { margin: 12px 0; }
+.toto-date-input-calendar .react-calendar__navigation__arrow { font-size: 1.5em; margin: 0 12px; }
+.toto-date-input-calendar .react-calendar__navigation__label { font-size: 1.3em; }
+.toto-date-input-calendar .react-calendar__month-view__weekdays { margin-bottom: 6px; color: #00acc1; text-align: center; text-transform: uppercase;}
+.toto-date-input-calendar button {
+  border: none;
+  background-color: transparent;
+  color: #5ddef4;
+  padding: 9px 0;
+  outline: none;
+  font-size: 1.1em;
+}
+.toto-date-input-calendar button.react-calendar__tile--active {
+  background-color: #ffeb3b;
+  color: currentColor;
+}

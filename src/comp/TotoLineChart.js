@@ -172,7 +172,7 @@ export default class TotoLineChart extends Component {
     this.svg.selectAll('.value').data(data).enter().append('text')
       .attr('class', 'value')
       .attr('x', (d) => {return this.x(d.x)})
-      .attr('y', (d) => {if (d.y == 0) return; return this.y(d.y) - this.textPaddingV})
+      .attr('y', (d) => {if (d.y === 0) return; return this.y(d.y) - this.textPaddingV})
       .attr('fill', this.theme.value)
       .style('text-anchor', 'middle')
       .style('font-size', 10)

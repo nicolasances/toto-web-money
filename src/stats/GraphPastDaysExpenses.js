@@ -95,7 +95,8 @@ export default class GraphPastDaysExpenses extends Component {
     // Function to check if the day is present in the array
     let dayIsPresent = (d) => {
       for (var i = 0; i < days.length; i++) {
-        if (days[i].date == d) return true;
+        // IS THAT CORRECT === ??
+        if (parseInt(days[i].date) === parseInt(d)) return true;
       }
       return false;
     }

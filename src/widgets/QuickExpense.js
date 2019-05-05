@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import TotoListAvatar from '../comp/TotoListAvatar';
 import TotoInput from '../comp/TotoInput';
+import TotoDateInput from '../comp/TotoDateInput';
 import TotoIconButton from '../comp/TotoIconButton';
 import TotoCurrencySelector from '../comp/TotoCurrencySelector';
 import CategorySelectionPopup from '../comp/CategorySelectionPopup';
@@ -25,6 +26,7 @@ export default class QuickExpense extends Component {
       category: 'VARIE',
       user: cookies.get('user'),
       currency: 'DKK',
+      date: moment().format('YYYYMMDD')
     }
 
     // Bindings
@@ -32,6 +34,7 @@ export default class QuickExpense extends Component {
     this.onChangeAmount = this.onChangeAmount.bind(this);
     this.onChangeCurrency = this.onChangeCurrency.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
+    this.onChangeDate = this.onChangeDate.bind(this);
     this.saveExpense = this.saveExpense.bind(this);
 
   }
@@ -78,16 +81,23 @@ export default class QuickExpense extends Component {
   }
 
   /**
+   * Change of date
+   */
+  onChangeDate(d) {
+    this.setState({date: d});
+  }
+
+  /**
    * Saves an expense
    */
   saveExpense() {
 
     let exp = {
       amount: this.state.amount,
-      date: moment().format('YYYYMMDD'),
+      date: this.state.date,
       category: this.state.category,
       description: this.state.description,
-      yearMonth: moment().format('YYYYMM'),
+      yearMonth: moment(this.state.date, 'YYYYMMDD').format('YYYYMM'),
       currency: this.state.currency,
       user: this.state.user.email
     }
@@ -123,6 +133,11 @@ export default class QuickExpense extends Component {
           size='l'
           popup={categoryPopup}
           />
+        <div className='input-container'>
+          <TotoDateInput
+            onChange={this.onChangeDate}
+            />
+        </div>
         <div className='input-container'>
           <TotoInput
             placeholder='Quick expense...'

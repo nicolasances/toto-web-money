@@ -36,18 +36,6 @@ export default class CategorySelectionPopup extends Component {
 
   render() {
 
-    let categoryImageSource, categoryImageColor, categoryLabel;
-    if (this.props.category == null) {
-      categoryImageSource = categoriesMap.get('VARIE').image;
-      // categoryImageColor = {tintColor: TRC.TotoTheme.theme.COLOR_THEME_LIGHT}
-      categoryLabel = categoriesMap.get('VARIE').label;
-    }
-    else {
-      categoryImageSource = categoriesMap.get(this.props.category).image;
-      // categoryImageColor = {tintColor: TRC.TotoTheme.theme.COLOR_TEXT}
-      categoryLabel = categoriesMap.get(this.props.category).label;
-    }
-
     // Categories buttons
     let categoryButtons = [];
     categoriesMap.forEach((value, key) => {
@@ -55,7 +43,7 @@ export default class CategorySelectionPopup extends Component {
       let k = 'CatNewEx' + Math.random();
 
       let cat = (
-        <Category key={k} image={value.image} label={value.label} selected={this.props.category == key} onPress={() => {this.onCategoryChange(key);}} />
+        <Category key={k} image={value.image} label={value.label} selected={this.props.category === key} onPress={() => {this.onCategoryChange(key);}} />
       )
 
       categoryButtons.push(cat);
@@ -77,10 +65,6 @@ export default class CategorySelectionPopup extends Component {
  * Category item
  */
 class Category extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
 
