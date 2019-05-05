@@ -31,6 +31,7 @@ import './TotoList.css';
  *                          }
  * - onAvatarClick        : (optional) function(item, selected) invoked when the avatar is clicked.
  *                          The function will receive the item clicked and the indication if it is selected or unselected
+ * - onPress              : (optional) function(item) invoked when the item (row) is clicked.
  */
 export default class TotoList extends Component {
 
@@ -53,7 +54,13 @@ export default class TotoList extends Component {
       let key = 'TotoListItem-' + i + '-' + Math.random();
 
       items.push((
-        <Item key={key} data={itemData} item={data[i]} onAvatarClick={this.props.onAvatarClick} />
+        <Item
+          key={key}
+          data={itemData}
+          item={data[i]}
+          onAvatarClick={this.props.onAvatarClick}
+          onPress={this.props.onPress}
+          />
       ))
     }
 
@@ -79,6 +86,7 @@ class Item extends Component {
     super(props);
 
     this.onItemAvatarClick = this.onItemAvatarClick.bind(this);
+    this.onPress = this.onPress.bind(this);
   }
 
   /**
@@ -91,6 +99,15 @@ class Item extends Component {
 
     // If there's a configured callback
     if (this.props.onAvatarClick) this.props.onAvatarClick(this.props.item, selected);
+
+  }
+
+  /**
+   * Reacts to the row click
+   */
+  onPress() {
+
+    if (this.props.onPress) this.props.onPress(this.props.item);
 
   }
 
@@ -165,13 +182,13 @@ class Item extends Component {
     }
 
     return (
-      <div className='item'>
+      <TouchableOpacity className='item' onPress={this.onPress}>
         {avatar}
         {date}
         {title}
         {amount}
         {highlights}
-      </div>
+      </TouchableOpacity>
     )
   }
 }

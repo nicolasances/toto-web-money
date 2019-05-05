@@ -97,6 +97,15 @@ export default class ExpensesListWidget extends Component {
   }
 
   /**
+   * When an expense is clicked
+   */
+  onExpenseClick(item) {
+
+    console.log(item);
+
+  }
+
+  /**
    * Extractor
    */
   dataExtractor(item) {
@@ -137,6 +146,7 @@ export default class ExpensesListWidget extends Component {
           <TotoList
             data={this.state.expenses}
             dataExtractor={this.dataExtractor}
+            onPress={this.onExpenseClick}
             />
         </div>
       </div>

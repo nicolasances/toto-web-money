@@ -17,7 +17,9 @@ export default class TouchableOpacity extends Component {
   /**
    * Handles the click of the button
    */
-  handleClick() {
+  handleClick(event) {
+
+    event.stopPropagation();
 
     // Update the state, to show the press action
     this.setState({pressed: true}, () => {
