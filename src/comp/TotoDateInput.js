@@ -19,7 +19,7 @@ export default class TotoDateInput extends Component {
     super(props);
 
     this.state = {
-      value: moment().format('YYYYMMDD'),
+      value: this.props.value ? this.props.value : moment().format('YYYYMMDD'),
       openPopup: false
     }
 
@@ -57,10 +57,13 @@ export default class TotoDateInput extends Component {
 
   render() {
 
+    let dateClass = 'toto-date-input';
+    dateClass += ' ' + (this.props.size ? this.props.size : 'm');
+
     return (
       <div>
 
-        <TouchableOpacity className="toto-date-input" onPress={this.openPopup}>
+        <TouchableOpacity className={dateClass} onPress={this.openPopup}>
           <div className='day'>{moment(this.state.value, 'YYYYMMDD').format('DD')}</div>
           <div className='month'>{moment(this.state.value, 'YYYYMMDD').format('MMM')}</div>
         </TouchableOpacity>

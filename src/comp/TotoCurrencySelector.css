@@ -2,6 +2,10 @@
 .toto-currency-selector { display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; }
 .toto-currency-selector:hover { color: #00acc1; }
 
+.toto-currency-selector .displayed-currency.m {font-size: 1em;}
+.toto-currency-selector .displayed-currency.l {font-size: 1.6em;}
+.toto-currency-selector .displayed-currency.xl {font-size: 2em;}
+
 .toto-currency-selector .popup {
   background-color: #007c91;
   color: rgba(0,0,0,0.3);

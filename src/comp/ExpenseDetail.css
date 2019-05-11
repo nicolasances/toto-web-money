@@ -1,0 +1,15 @@
+
+.expense-detail {
+  display: flex; flex-direction: column;
+  padding: 24px 48px;
+}
+
+.expense-detail .expense-detail-line1 { display: flex; flex-direction: row; justify-content: center; align-items: center; }
+.expense-detail .expense-detail-line2 { display: flex; flex-direction: row; justify-content: center; }
+.expense-detail .expense-detail-line3 {}
+.expense-detail .expense-detail-buttons { display: flex; flex-direction: row; justify-content: center; align-items: center; margin-top: 24px;}
+
+.expense-detail .expense-detail-line1 .date-container {margin: 0 12px;}
+.expense-detail .expense-detail-line1 .amount-container {margin: 0 12px;}
+.expense-detail .expense-detail-line1 .currency-container {margin: 0 12px;}
+.expense-detail .expense-detail-line2 .description-container {margin: 24px;}

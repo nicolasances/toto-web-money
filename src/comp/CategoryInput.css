@@ -1,0 +1,9 @@
+
+.category-input { display: flex; flex-direction: column; justify-content: center; align-items: center;}
+
+.category-input svg { fill: currentColor; }
+.category-input.m svg { width: 20px; height: 20px; }
+.category-input.l svg { width: 24px; height: 24px; }
+.category-input.xl svg { width: 46px; height: 46px; }
+
+.category-input .label { margin-top: 6px; }

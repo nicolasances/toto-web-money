@@ -5,6 +5,11 @@ import TouchableOpacity from './TouchableOpacity';
 
 import './TotoCurrencySelector.css';
 
+/**
+ * Currency selector for Toto
+ * Properties:
+ * - initialValue             : initial value of the currency (e.g. 'EUR')
+ */
 export default class TotoCurrencySelector extends Component {
 
   constructor(props) {
@@ -32,8 +37,11 @@ export default class TotoCurrencySelector extends Component {
 
   render() {
 
+    let displayedClass = 'displayed-currency';
+    displayedClass += ' ' + (this.props.size ? this.props.size : 'm');
+
     let displayedCurrency = (
-      <div className='displayed-currency'>
+      <div className={displayedClass}>
         {this.state.value}
       </div>
     )

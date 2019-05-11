@@ -31,6 +31,22 @@ export default class ExpensesAPI {
   }
 
   /**
+   * Updates an expense
+   */
+  putExpense(exId, ex) {
+
+    // Post the data
+    return new TotoAPI().fetch('/expenses/expenses/' + exId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(ex)
+    }).then((response => response.json()));
+
+  }
+
+  /**
    * Gets the uploads
    */
   getUploads() {

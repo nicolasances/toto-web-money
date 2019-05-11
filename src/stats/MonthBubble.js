@@ -36,12 +36,14 @@ export default class MonthBubble extends Component {
 
     // Subscriptions
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
   }
 
   componentWillUnmount() {
 
     // Subscriptions
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
   }
 
   /**

@@ -14,7 +14,7 @@ export default class TotoInput extends Component {
     super(props);
 
     this.state = {
-      value: '',
+      value: props.value ? props.value : '',
       placeholder: props.placeholder
     }
 
@@ -66,16 +66,19 @@ export default class TotoInput extends Component {
     // Input text classes
     let inputClass = 'text-input';
     // Placeholder class
-    if (this.state.value === '') inputClass += ' placeholder';
+    if (!this.state.value || this.state.value === '') inputClass += ' placeholder';
+    // Size
+    inputClass += ' ' + (this.props.size ? this.props.size : 'm')
 
     // Value
-    let value = this.state.value !== '' ? this.state.value : this.state.placeholder
+    let value = (this.state.value !== '') ? this.state.value : this.state.placeholder
 
     // Additional text styles
     let textStyles = {};
     if (this.props.color) textStyles.color = this.props.color;
     if (this.props.padding) textStyles.padding = this.props.padding;
     if (this.props.width) textStyles.width = this.props.width;
+    if (this.props.textAlign) textStyles.textAlign = this.props.textAlign;
 
     return (
       <div className="toto-input" onClick={this.onPress}>

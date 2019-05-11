@@ -4,4 +4,5 @@ export const AUTH = 'Basic c3RvOnRvdG8=';
 
 export const EVENTS = {
   expenseCreated: 'expenseCreated', // Expense has been created
+  expenseUpdated: 'expenseUpdated', // Expense has been updated
 }

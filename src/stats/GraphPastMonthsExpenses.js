@@ -44,6 +44,7 @@ export default class GraphPastMonthsExpenses extends Component {
 
     // Subscriptions
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
 
   }
 
@@ -51,6 +52,7 @@ export default class GraphPastMonthsExpenses extends Component {
 
     // Subscriptions
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
   }
 
   /**

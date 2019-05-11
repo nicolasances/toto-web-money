@@ -1,7 +1,14 @@
 
 .toto-date-input { text-align: center; cursor: pointer; }
-.toto-date-input .day {font-size: 1.1em;}
-.toto-date-input .month {font-size: 0.8em; text-transform: uppercase;}
+.toto-date-input .day {}
+.toto-date-input .month {text-transform: uppercase;}
+
+.toto-date-input.m .day {font-size: 1.1em;}
+.toto-date-input.m .month {font-size: 0.8em;}
+.toto-date-input.l .day {font-size: 1.6em;}
+.toto-date-input.l .month {font-size: 1.4em;}
+.toto-date-input.xl .day {font-size: 2em;}
+.toto-date-input.xl .month {font-size: 1.8em;}
 
 .toto-date-input-calendar { }
 .toto-date-input-calendar .react-calendar__navigation { margin: 12px 0; }

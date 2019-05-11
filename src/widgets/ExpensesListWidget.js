@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import moment from 'moment';
+import Popup from 'reactjs-popup';
 
 import MonthNavigator from '../comp/MonthNavigator';
+import ExpenseDetail from '../comp/ExpenseDetail';
 import ExpensesAPI from '../services/ExpensesAPI';
 import TotoList from '../comp/TotoList';
 import categoriesMap from '../services/CategoriesMap';
@@ -28,6 +30,9 @@ export default class ExpensesListWidget extends Component {
     this.onMonthChange = this.onMonthChange.bind(this);
     this.onExpenseCreated = this.onExpenseCreated.bind(this);
     this.onReconcilePress = this.onReconcilePress.bind(this);
+    this.openDetailPopup = this.openDetailPopup.bind(this);
+    this.closeDetailPopup = this.closeDetailPopup.bind(this);
+    this.selectExpense = this.selectExpense.bind(this);
     this.reload = this.reload.bind(this);
 
   }
@@ -41,6 +46,7 @@ export default class ExpensesListWidget extends Component {
 
     // Subscriptions
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
   }
 
   /**
@@ -50,6 +56,7 @@ export default class ExpensesListWidget extends Component {
 
     // Subscriptions
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
   }
 
   /**
@@ -96,13 +103,25 @@ export default class ExpensesListWidget extends Component {
 
   }
 
+  selectExpense(item) {
+    // Select the expense
+    this.setState({selectedExpense: item});
+    // Open the detail popup
+    this.openDetailPopup();
+  }
+
   /**
    * When an expense is clicked
    */
-  onExpenseClick(item) {
+  openDetailPopup() {
+    this.setState({openDetailPopup: true});
+  }
 
-    console.log(item);
-
+  /**
+   * Close the expense detail
+   */
+  closeDetailPopup() {
+    this.setState({openDetailPopup: false});
   }
 
   /**
@@ -146,9 +165,24 @@ export default class ExpensesListWidget extends Component {
           <TotoList
             data={this.state.expenses}
             dataExtractor={this.dataExtractor}
-            onPress={this.onExpenseClick}
+            onPress={this.selectExpense}
             />
         </div>
+
+        <Popup
+          on='click'
+          offsetX={48}
+          open={this.state.openDetailPopup}
+          onClose={this.closeDetailPopup}
+          overlayStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
+          contentStyle={{padding: 0, backgroundColor: '#007c91', borderRadius: '3px', border: 'none', boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'}}
+          arrow={false}
+          >
+
+            <ExpenseDetail expense={this.state.selectedExpense} />
+
+        </Popup>
+
       </div>
     )
   }

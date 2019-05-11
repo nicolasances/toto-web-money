@@ -49,9 +49,8 @@ export default class TotoIconButton extends Component {
 
     // Button class
     let buttonClass = "toto-icon-button";
+    buttonClass += ' ' + (this.props.size ? this.props.size : 'm')
     if (this.props.disabled) buttonClass += ' disabled'
-    if (this.props.size) buttonClass += ' ' + this.props.size;
-    else buttonClass += ' m';
     if (this.props.borders === false) buttonClass += ' no-border'
 
     // Additional styles
