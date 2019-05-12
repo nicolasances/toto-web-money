@@ -36,7 +36,7 @@ export default class RecentUploads extends Component {
    */
   loadData() {
 
-    new ExpensesAPI().getUploads().then((data) => {
+    new ExpensesAPI().getUploads(this.state.user.email).then((data) => {
 
       this.setState({
         loading: false,

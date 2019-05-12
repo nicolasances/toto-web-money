@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './TotoScreen.css';
 import './DashboardScreen.css';
+import Cookies from 'universal-cookie';
 
 import TotoDropzone from '../comp/TotoDropzone';
 import ExpensesUploadedData from '../comp/ExpensesUploadedData';
 import RecentUploads from '../comp/RecentUploads';
 import BankSelector from '../comp/BankSelector';
 import ExpensesAPI from '../services/ExpensesAPI';
+
+const cookies = new Cookies();
 
 export default class DashboardScreen extends Component { 
 
@@ -17,6 +20,7 @@ export default class DashboardScreen extends Component { 
       files: [],
       bankChoiceVisible: false,
       uploading: false,
+      user: cookies.get('user'),
     }
 
     this.onConfirmUpload = this.onConfirmUpload.bind(this);
@@ -35,7 +39,7 @@ export default class DashboardScreen extends Component { 
 
     return new Promise((success, failure) => {
 
-      new ExpensesAPI().postExpensesFile(file, bankCode).then((data) => {
+      new ExpensesAPI().postExpensesFile(file, bankCode, this.state.user.email).then((data) => {
 
         setTimeout(() => {this.setState({uploading: false, uploadedData: data});}, 1000);
 

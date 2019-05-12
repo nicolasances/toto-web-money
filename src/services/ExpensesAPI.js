@@ -8,9 +8,9 @@ export default class ExpensesAPI {
   /**
    * Posts the specified file to the /expenses/import endpoint
    */
-  postExpensesFile(file, bankCode) {
+  postExpensesFile(file, bankCode, userEmail) {
 
-    return new TotoAPI().postFile('/expenses/import/uploads/' + bankCode, file);
+    return new TotoAPI().postFile('/expenses/import/uploads/' + bankCode + '?user=' + userEmail, file);
 
   }
 
@@ -49,9 +49,9 @@ export default class ExpensesAPI {
   /**
    * Gets the uploads
    */
-  getUploads() {
+  getUploads(user) {
 
-    return new TotoAPI().fetch('/expenses/import/uploads').then((response) => response.json());
+    return new TotoAPI().fetch('/expenses/import/uploads?user=' + user).then((response) => response.json());
 
   }
 
@@ -61,12 +61,11 @@ export default class ExpensesAPI {
   deleteAllUploads(userEmail) {
 
     // Post the data
-    return new TotoAPI().fetch('/expenses/import/uploads/', {
+    return new TotoAPI().fetch('/expenses/import/uploads?user=' + userEmail, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({user: userEmail})
+      }
     }).then((response => response.json()));
 
   }
