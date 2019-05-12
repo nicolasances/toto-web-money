@@ -4,4 +4,14 @@
   flex: 1;
   flex-direction: column;
   min-width: 25vw;
+  height: 100vh;
+}
+
+.recent-uploads .header {
+  display: flex; flex-direction: row; align-items: center;
+}
+.recent-uploads .header .title {
+  font-size: 1.3em;
+  margin: 12px 0;
+  flex: 1;
 }

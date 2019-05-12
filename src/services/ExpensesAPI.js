@@ -56,6 +56,23 @@ export default class ExpensesAPI {
   }
 
   /**
+   * Deletes all uploads
+   */
+  deleteAllUploads(userEmail) {
+
+    // Post the data
+    return new TotoAPI().fetch('/expenses/import/uploads/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({user: userEmail})
+    }).then((response => response.json()));
+
+  }
+
+
+  /**
    * Get generic app settings
    * from the /app/expenses microservice
    */

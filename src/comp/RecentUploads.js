@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import Cookies from 'universal-cookie';
 
 import TotoDashboardSection from './TotoDashboardSection';
+import TotoIconButton from './TotoIconButton';
 import TotoList from './TotoList';
 import ExpensesAPI from '../services/ExpensesAPI';
 
 import trash from '../img/trash.svg';
 
 import './RecentUploads.css';
+
+const cookies = new Cookies();
 
 export default class RecentUploads extends Component {
 
@@ -16,13 +20,15 @@ export default class RecentUploads extends Component {
 
     this.state = {
       loading: true,
-      selectedItemsCount: 0
+      selectedItemsCount: 0,
+      user: cookies.get('user'),
     }
 
     // Load the data
     this.loadData();
 
     this.onAvatarClick = this.onAvatarClick.bind(this);
+    this.clearAll = this.clearAll.bind(this);
   }
 
   /**
@@ -89,6 +95,16 @@ export default class RecentUploads extends Component {
   }
 
   /**
+   * Clears all the recent uploads
+   */
+  clearAll() {
+
+    new ExpensesAPI().deleteAllUploads(this.state.user.email).then(() => {
+      this.loadData();
+    })
+  }
+
+  /**
    * Retrieves the list of selected items
    */
   getSelectedItems() {
@@ -114,13 +130,17 @@ export default class RecentUploads extends Component {
 
     return (
       <div className='recent-uploads'>
-        <TotoDashboardSection title="Recent uploads" empty={!this.state.uploads} loading={this.state.loading} actions={actions}>
-          <TotoList
-              data={this.state.uploads}
-              dataExtractor={this.dataExtractor}
-              onAvatarClick={this.onAvatarClick}
-              />
-        </TotoDashboardSection>
+        <div className="header">
+          <div className="title">Recent uploads</div>
+          <div className="buttons-container">
+            <TotoIconButton image={require('../img/trash.svg')} onPress={this.clearAll} />
+          </div>
+        </div>
+        <TotoList
+            data={this.state.uploads}
+            dataExtractor={this.dataExtractor}
+            onAvatarClick={this.onAvatarClick}
+            />
       </div>
     )
   }
