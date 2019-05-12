@@ -7,6 +7,8 @@ import ExpensesAPI from '../services/ExpensesAPI';
 import TotoEventBus from '../services/TotoEventBus';
 import * as config from '../Config';
 
+import './GraphPastMonthsExpenses.css';
+
 const cookies = new Cookies();
 
 export default class GraphPastMonthsExpenses extends Component {
@@ -14,7 +16,7 @@ export default class GraphPastMonthsExpenses extends Component {
   constructor(props) {
     super(props);
 
-    this.maxMonths = 10;
+    this.maxMonths = props.months ? props.months : 10;
     this.limitMonthsToShowValue = 10;
 
     this.state = {
@@ -156,7 +158,7 @@ export default class GraphPastMonthsExpenses extends Component {
           data={this.state.preparedData}
           xAxisTransform={this.xAxisTransform}
           valueLabelTransform={this.valueLabel}
-          maxHeight={100}
+          maxHeight={this.props.maxHeight}
           margins={{horizontal: 24, vertical: 12}}
           />
       </div>

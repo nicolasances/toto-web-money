@@ -17,8 +17,9 @@ class TotoMenu extends Component {
     return (
       <div style={styles.menu}>
         <TotoMenuLogo />
-        <TotoMenuItem label='Import' target='/' image={require('../img/import.svg')} selected={this.props.location.pathname === '/'} />
-        <TotoMenuItem label='Expenses' target='/expenses' image={require('../img/chart.svg')} selected={this.props.location.pathname === '/expenses'} />
+        <TotoMenuItem label='This month' target='/' image={require('../img/location-pointer.svg')} selected={this.props.location.pathname === '/'} />
+        <TotoMenuItem label='Past year' target='/year' image={require('../img/chart.svg')} selected={this.props.location.pathname === '/year'} />
+        <TotoMenuItem label='Import' target='/import' image={require('../img/import.svg')} selected={this.props.location.pathname === '/import'} />
         <div style={{display: 'flex', flex: 1}}></div>
         <TotoMenuItem label='Logout' onPress={this.props.onSignOut} image={require('../img/logout.svg')} />
       </div>

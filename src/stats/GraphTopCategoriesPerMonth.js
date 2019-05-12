@@ -80,7 +80,7 @@ export default class GraphTopCategoriesPerMonth extends Component {
 
     // Define how many days in the past
     let targetCurrency = this.state.settings ? this.state.settings.currency : null;
-    let monthsBack = 24;
+    let monthsBack = this.props.months ? this.props.months : 24;
     let yearMonthGte = moment().subtract(monthsBack, 'months').format('YYYYMM');
 
     new ExpensesAPI().getTopSpendingCategoriesPerMonth(this.state.user.email, yearMonthGte, targetCurrency).then((data) => {

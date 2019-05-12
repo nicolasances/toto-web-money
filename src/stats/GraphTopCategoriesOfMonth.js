@@ -82,7 +82,7 @@ export default class GraphTopCategoriesOfMonth extends Component {
     // Define how many days in the past
     let targetCurrency = this.state.settings ? this.state.settings.currency : null;
     let yearMonth = moment().format('YYYYMM');
-    let maxCategories = 7;
+    let maxCategories = 12;
 
     new ExpensesAPI().getTopSpendingCategoriesOfMonth(this.state.user.email, yearMonth, maxCategories, targetCurrency).then((data) => {
 
@@ -160,7 +160,7 @@ export default class GraphTopCategoriesOfMonth extends Component {
           valueImage={this.valueImage}
           margins={{horizontal: 24, vertical: 12}}
           />
-        <div className='title'>Highest spending of the month</div>
+        <div className='title'></div>
       </div>
     )
   }

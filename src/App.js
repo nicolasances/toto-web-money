@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 
 import DashboardScreen from './screens/DashboardScreen';
 import ExpensesScreen from './screens/ExpensesScreen';
+import ThisYearScreen from './screens/ThisYearScreen';
 import TotoMenu from './comp/TotoMenu';
 
 import './App.css';
@@ -95,8 +96,9 @@ class App extends Component {
       <div className="toto-app">
         <TotoMenu onSignOut={this.signOut}/>
         <Switch>
-          <Route exact path='/' component={DashboardScreen} />
-          <Route exact path='/expenses' component={ExpensesScreen} />
+          <Route exact path='/' component={ExpensesScreen} />
+          <Route exact path='/year' component={ThisYearScreen} />
+          <Route exact path='/import' component={DashboardScreen} />
         </Switch>
       </div>
     )

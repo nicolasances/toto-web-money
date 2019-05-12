@@ -18,8 +18,14 @@
   justify-content: center;
   margin-left: 12px;
 }
+.quick-expense .input-container.grow {
+  flex: 1
+}
+.quick-expense .input-container.margined {
+  margin-right: 24px;
+}
 
 .quick-expense .input-container.amount {
   background-color: #00acc1;
-  border-radius: 3px;
+  margin: -12px 0;
 }

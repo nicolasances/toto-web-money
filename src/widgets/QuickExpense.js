@@ -138,7 +138,7 @@ export default class QuickExpense extends Component {
             onChange={this.onChangeDate}
             />
         </div>
-        <div className='input-container'>
+        <div className='input-container grow'>
           <TotoInput
             placeholder='Quick expense...'
             onChange={this.onChangeDescription}
@@ -152,13 +152,12 @@ export default class QuickExpense extends Component {
             onChange={this.onChangeAmount}
             />
         </div>
-        <div className='input-container'>
+        <div className='input-container margined'>
           <TotoCurrencySelector
             initialValue='DKK'
             />
         </div>
-        <div style={{display: 'flex', flex: 1}}></div>
-        <TotoIconButton image={require('../img/tick.svg')} size='l' onPress={this.saveExpense}/>
+        <TotoIconButton image={require('../img/tick.svg')} size='m' onPress={this.saveExpense}/>
       </div>
     )
   }

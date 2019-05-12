@@ -19,18 +19,12 @@ export default class ExpensesScreen extends Component {
         <div className="line1">
           <div className="left"> <GraphPastDaysExpenses /> </div>
           <div className="center"> <MonthBubble /> </div>
-          <div className="right"> <GraphPastMonthsExpenses /> </div>
+          <div className="right"> <GraphPastMonthsExpenses maxHeight={100}/> </div>
         </div>
         <div className="line2">
           <div className="left">
-            <div className="line1">
-              <div className="left">
-                <div className="line1"> <GraphPastYearsExpenses /> </div>
-                <div className="line2"> <QuickExpense /> </div>
-              </div>
-              <div className="right"> <GraphTopCategoriesOfMonth /> </div>
-            </div>
-            <div className="line2"> <GraphTopCategoriesPerMonth /> </div>
+            <div className="line2"> <GraphTopCategoriesOfMonth /> </div>
+            <div className="line1"> <QuickExpense /> </div>
           </div>
           <div className="right"> <ExpensesListWidget /> </div>
         </div>
