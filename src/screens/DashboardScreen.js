@@ -8,6 +8,8 @@ import ExpensesUploadedData from '../comp/ExpensesUploadedData';
 import RecentUploads from '../comp/RecentUploads';
 import BankSelector from '../comp/BankSelector';
 import ExpensesAPI from '../services/ExpensesAPI';
+import TotoEventBus from '../services/TotoEventBus';
+import * as config from '../Config';
 
 const cookies = new Cookies();
 
@@ -41,7 +43,10 @@ export default class DashboardScreen extends Component { 
 
       new ExpensesAPI().postExpensesFile(file, bankCode, this.state.user.email).then((data) => {
 
-        setTimeout(() => {this.setState({uploading: false, uploadedData: data});}, 1000);
+        setTimeout(() => {
+          this.setState({uploading: false, uploadedData: data});
+          TotoEventBus.publishEvent({name: config.EVENTS.expensesFileUploaded});
+        }, 1000);
 
       });
 
@@ -87,6 +92,11 @@ export default class DashboardScreen extends Component { 
 
     // Time to upload the expenses!
     // TODO
+    console.log(this.state.uploadedData);
+
+    new ExpensesAPI().confirmUploads(this.state.uploadedData.months, this.state.user.email).then((data) => {
+      console.log(data);
+    })
 
   }
 

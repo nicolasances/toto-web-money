@@ -135,9 +135,14 @@ export default class ExpensesListWidget extends Component {
 
     // Highlights
     let highlights = [];
+    // Highlight - Consolildation icon
     if (!item.consolidated) highlights.push({
       image: require('../img/reconcile.svg'),
       onPress: this.onReconcilePress
+    })
+    // Highlight - Imported from bank statement
+    if (item.additionalData && item.additionalData.source === 'bank-statement') highlights.push({
+      image: require('../img/bank.svg')
     })
 
     return {

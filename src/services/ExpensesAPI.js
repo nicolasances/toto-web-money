@@ -6,15 +6,6 @@ import TotoAPI from './TotoAPI';
 export default class ExpensesAPI {
 
   /**
-   * Posts the specified file to the /expenses/import endpoint
-   */
-  postExpensesFile(file, bankCode, userEmail) {
-
-    return new TotoAPI().postFile('/expenses/import/uploads/' + bankCode + '?user=' + userEmail, file);
-
-  }
-
-  /**
    * Posts an expense
    */
   postExpense(ex) {
@@ -42,6 +33,31 @@ export default class ExpensesAPI {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(ex)
+    }).then((response => response.json()));
+
+  }
+
+  /**
+   * Posts the specified file to the /expenses/import endpoint
+   */
+  postExpensesFile(file, bankCode, userEmail) {
+
+    return new TotoAPI().postFile('/expenses/import/uploads/' + bankCode + '?user=' + userEmail, file);
+
+  }
+
+  /**
+   * Confirms the provided uploads
+   */
+  confirmUploads(months, userEmail) {
+
+    // Post the data
+    return new TotoAPI().fetch('/expenses/import/uploads/confirm', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({months: months, user: userEmail})
     }).then((response => response.json()));
 
   }

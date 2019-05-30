@@ -6,6 +6,8 @@ import TotoDashboardSection from './TotoDashboardSection';
 import TotoIconButton from './TotoIconButton';
 import TotoList from './TotoList';
 import ExpensesAPI from '../services/ExpensesAPI';
+import TotoEventBus from '../services/TotoEventBus';
+import * as config from '../Config';
 
 import trash from '../img/trash.svg';
 
@@ -24,11 +26,30 @@ export default class RecentUploads extends Component {
       user: cookies.get('user'),
     }
 
+    // Binding
+    this.loadData = this.loadData.bind(this);
+
     // Load the data
     this.loadData();
 
     this.onAvatarClick = this.onAvatarClick.bind(this);
     this.clearAll = this.clearAll.bind(this);
+  }
+
+  /**
+   * When mounted
+   */
+  componentDidMount() {
+
+    TotoEventBus.subscribeToEvent(config.EVENTS.expensesFileUploaded, this.loadData);
+  }
+
+  /**
+   * When unmounting
+   */
+  componentWillUnmount() {
+
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expensesFileUploaded, this.loadData);
   }
 
   /**

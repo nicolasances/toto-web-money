@@ -175,7 +175,7 @@ class Item extends Component {
       highlights = (
         <div className='highlights'>
           {data.highlights.map((item, index) => {
-            return (<TouchableOpacity key={'TotoList-Highlight-' + Math.random()} onPress={() => {item.onPress(this.props.item)}}><SVG src={item.image} /></TouchableOpacity>)
+            return (<TouchableOpacity key={'TotoList-Highlight-' + Math.random()} onPress={() => {if (item.onPress) item.onPress(this.props.item)}}><SVG className={item.onPress ? 'enabled' : 'disabled'} src={item.image} /></TouchableOpacity>)
           })}
         </div>
       )
