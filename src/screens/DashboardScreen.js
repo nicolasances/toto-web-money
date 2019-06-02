@@ -5,6 +5,7 @@ import Cookies from 'universal-cookie';
 
 import TotoDropzone from '../comp/TotoDropzone';
 import ExpensesUploadedData from '../comp/ExpensesUploadedData';
+import UploadedMonthDetail from '../comp/UploadedMonthDetail';
 import RecentUploads from '../comp/RecentUploads';
 import BankSelector from '../comp/BankSelector';
 import ExpensesAPI from '../services/ExpensesAPI';
@@ -30,8 +31,10 @@ export default class DashboardScreen extends Component { 
     this.onFileUploadReset = this.onFileUploadReset.bind(this);
     this.onConfirmUploadedData = this.onConfirmUploadedData.bind(this);
     this.onCancelUploadedData = this.onCancelUploadedData.bind(this);
-    this.onSelectedItemFromUploadedData = this.onSelectedItemFromUploadedData.bind(this);
     this.sendFile = this.sendFile.bind(this);
+    this.clearState = this.clearState.bind(this);
+    this.onUploadSelected = this.onUploadSelected.bind(this);
+    this.resetSelectedMonth = this.resetSelectedMonth.bind(this);
   }
 
   /**
@@ -44,14 +47,45 @@ export default class DashboardScreen extends Component { 
       new ExpensesAPI().postExpensesFile(file, bankCode, this.state.user.email).then((data) => {
 
         setTimeout(() => {
+
+          // Update the state, setting the uploaded data
           this.setState({uploading: false, uploadedData: data});
+
+          // Fire an event (file uploaded)
           TotoEventBus.publishEvent({name: config.EVENTS.expensesFileUploaded});
+
+          // Clear uploaded data after a bit
+          setTimeout(this.clearState, 30000);
+
         }, 1000);
 
       });
 
     });
 
+  }
+
+  /**
+   * Clears the state
+   */
+  clearState() {
+
+    // Remove the uploaded data
+    this.setState({uploadedData: null});
+
+    // Reset the upload button
+    this.onFileUploadReset();
+
+    // Send a clear files event
+    TotoEventBus.publishEvent({name: config.EVENTS.totoDropzoneClearFilesRequested});
+
+  }
+
+  /**
+   * Reset the selected month
+   */
+  resetSelectedMonth() {
+    this.setState({selectedMonth: null});
   }
 
   /**
@@ -79,7 +113,7 @@ export default class DashboardScreen extends Component { 
       // Upload the files
       this.state.files.forEach(file => {
         this.sendFile(file, bankCode);
-      })
+      });
 
     });
   }
@@ -110,18 +144,22 @@ export default class DashboardScreen extends Component { 
   }
 
   /**
-   * Reacts to the selection of an item in the list of uploaded items
+   * When an upload is selected
    */
-  onSelectedItemFromUploadedData(item, selected) {
+  onUploadSelected(selectedMonth) {
 
-    // Update the state
-    this.setState(state => {
-      const uploads = state.uploadedData.months.map((it, i) => {
-        if (it.id === item.id) it.selected = selected;
-        return it;
-      });
-      return {uploadedData: {months: uploads}}
-    });
+    // Reset the upload button state, removing the instructions, etc..
+    this.clearState();
+
+    // Load the data
+    new ExpensesAPI().getUploadedMonth(selectedMonth.id).then((monthDetails) => {
+
+      // Show the popup with the month data
+      this.setState({selectedMonth: monthDetails});
+
+      console.log(monthDetails);
+
+    })
 
   }
 
@@ -135,6 +173,29 @@ export default class DashboardScreen extends Component { 
       </div>
     )
 
+    // Upload successfull + instructions message
+    let instructions;
+    if (this.state.uploadedData) instructions = (
+      <div className="instructions">
+        <div className="title">File uploaded successfully!</div>
+        <div className="message">
+          <p>In the panel on the right, you'll now find the data that has been uploaded.</p>
+          <p>Those are the expenses contained in the file, <b>grouped in months.</b></p>
+          <p>Select a month to open the review panel. From the review panel you'll be able to confirm the expenses and import them into Toto.</p>
+        </div>
+      </div>
+    )
+
+    // Selected uploaded month (selected from the recent uploads)
+    let selectedUploadedMonth;
+    if (this.state.selectedMonth) selectedUploadedMonth = (
+      <UploadedMonthDetail month={this.state.selectedMonth} onClose={this.resetSelectedMonth} />
+    )
+
+    // Classes
+    let instructionsContainerClass = 'instructions-container';
+    if (this.state.uploadedData) instructionsContainerClass += ' visible';
+
     return (
       <div className="TotoScreen dashboard-screen">
         <div className="upload-section">
@@ -144,12 +205,14 @@ export default class DashboardScreen extends Component { 
           <div style={{margin: '12px 0', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
             {bankSelector}
           </div>
-          <div style={{margin: '12px 0', display: 'flex', alignItems: 'stretch', flexDirection: 'column'}}>
-            <ExpensesUploadedData visible={this.state.uploadedData != null} uploadedData={this.state.uploadedData} onSelectItem={this.onSelectedItemFromUploadedData} onConfirm={this.onConfirmUploadedData} onCancel={this.onCancelUploadedData} />
+          <div className={instructionsContainerClass}>
+            {instructions}
           </div>
+
+          {selectedUploadedMonth}
         </div>
         <div className="recent-uploads-section">
-          <RecentUploads />
+          <RecentUploads onItemPress={this.onUploadSelected} />
         </div>
       </div>
     )

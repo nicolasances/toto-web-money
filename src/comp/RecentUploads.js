@@ -14,6 +14,9 @@ import trash from '../img/trash.svg';
 import './RecentUploads.css';
 
 const cookies = new Cookies();
+const imgInProgress = require('../img/hourglass.svg');
+const imgDone = require('../img/tick.svg');
+const imgExclamation = require('../img/exclamation.svg');
 
 export default class RecentUploads extends Component {
 
@@ -32,7 +35,6 @@ export default class RecentUploads extends Component {
     // Load the data
     this.loadData();
 
-    this.onAvatarClick = this.onAvatarClick.bind(this);
     this.clearAll = this.clearAll.bind(this);
   }
 
@@ -74,10 +76,15 @@ export default class RecentUploads extends Component {
    */
   dataExtractor(item, index) {
 
+    let avatarImage;
+    if (item.status === 'INPROGRESS') avatarImage = imgInProgress;
+    else if (item.status === 'POSTED') avatarImage = imgDone;
+    else if (item.status === 'INCONSISTENT') avatarImage = imgExclamation;
+
     return {
       avatar: {
-        type: 'select',
-        value: '',
+        type: 'image',
+        value: avatarImage,
         size: 'm'
       },
       date: {
@@ -86,25 +93,6 @@ export default class RecentUploads extends Component {
       title: item.count + ' expenses',
       amount: '€ ' + item.total
     }
-
-  }
-
-  /**
-   * When an avatar is selected, activate the "delete" button
-   */
-  onAvatarClick(item, selected) {
-
-    // Update the state
-    this.setState(state => {
-      const uploads = state.uploads.map((it, i) => {
-        if (it.id === item.id) it.selected = selected;
-        return it;
-      });
-      return {uploads}
-    });
-
-    if (selected) this.setState({selectedItemsCount: this.state.selectedItemsCount + 1})
-    else this.setState({selectedItemsCount: this.state.selectedItemsCount - 1});
 
   }
 
@@ -160,7 +148,7 @@ export default class RecentUploads extends Component {
         <TotoList
             data={this.state.uploads}
             dataExtractor={this.dataExtractor}
-            onAvatarClick={this.onAvatarClick}
+            onPress={this.props.onItemPress}
             />
       </div>
     )

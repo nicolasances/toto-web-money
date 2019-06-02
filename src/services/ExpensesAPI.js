@@ -72,6 +72,15 @@ export default class ExpensesAPI {
   }
 
   /**
+   * Gets a specific uploaded month
+   */
+  getUploadedMonth(monthId) {
+
+    return new TotoAPI().fetch('/expenses/import/uploads/' + monthId).then((response) => response.json());
+
+  }
+
+  /**
    * Deletes all uploads
    */
   deleteAllUploads(userEmail) {

@@ -60,11 +60,18 @@ export default class TotoIconButton extends Component {
       style.marginRight = this.props.marginHorizontal + 'px';
     }
 
+    // Label
+    let label;
+    if (this.props.label) label = (
+      <div className="label">{this.props.label}</div>
+    )
+
     return (
-      <div style={style}>
+      <div style={style} className="toto-icon-button-container">
         <TouchableOpacity className={buttonClass} onPress={this.handleClick}>
           <SVG src={this.props.image} className="icon"/>
         </TouchableOpacity>
+        {label}
       </div>
     )
   }

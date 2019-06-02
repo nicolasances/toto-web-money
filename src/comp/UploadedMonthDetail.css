@@ -1,0 +1,26 @@
+
+.uploaded-month-detail {
+  display: flex; flex-direction: column; flex: 1;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  transform: scale(0);
+  padding: 12px;
+  background-color: #007c91;
+  color: #5ddef4;
+
+  height: 50vh;
+}
+.uploaded-month-detail.visible {
+  transform: scale(1);
+}
+
+.uploaded-month-detail .header { display: flex; flex-direction: row; }
+.uploaded-month-detail .header .buttons-container { display: flex; flex-direction: row; }
+.uploaded-month-detail .header .title-container { display: flex; flex: 1; flex-direction: column; justify-content: center; }
+.uploaded-month-detail .header .title-container .title { font-size: 1.4em; margin-bottom: 2px; }
+.uploaded-month-detail .header .title-container .subtitle { font-size: 0.9em; opacity: 0.6; }
+
+.uploaded-month-detail .confirm-container { display: flex; flex-direction: row; justify-content: center; margin: 12px 0; }
+
+.uploaded-month-detail .expenses-container { display: flex; flex-direction: column; flex: 1; }

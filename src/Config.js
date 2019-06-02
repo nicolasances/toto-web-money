@@ -6,4 +6,5 @@ export const EVENTS = {
   expenseCreated: 'expenseCreated', // Expense has been created
   expenseUpdated: 'expenseUpdated', // Expense has been updated
   expensesFileUploaded: 'expensesFileUploaded', // Expenses file has been uploaded
+  totoDropzoneClearFilesRequested: 'totoDropzoneClearFilesRequested', // Command to clear the files cache (in the TotoDropzone)
 }

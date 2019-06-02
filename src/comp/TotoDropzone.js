@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TotoIconButton from './TotoIconButton';
+import TotoEventBus from '../services/TotoEventBus';
+import * as config from '../Config';
 
 import './TotoDropzone.css';
 
@@ -28,6 +30,20 @@ export default class TotoDropzone extends Component {
     this.onDrop = this.onDrop.bind(this)
     this.reset = this.reset.bind(this)
     this.confirm = this.confirm.bind(this)
+  }
+
+  /**
+   * When mounting
+   */
+  componentDidMount() {
+    TotoEventBus.subscribeToEvent(config.EVENTS.totoDropzoneClearFilesRequested, this.reset);
+  }
+
+  /**
+   * When unmounting
+   */
+  componentWillUnmount() {
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.totoDropzoneClearFilesRequested, this.reset);
   }
 
   openFileDialog() {

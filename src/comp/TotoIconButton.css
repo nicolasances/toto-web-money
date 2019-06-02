@@ -1,4 +1,7 @@
 
+.toto-icon-button-container {
+  display: flex; flex-direction: column; align-items: center;
+}
 .toto-icon-button {
   display: flex;
   flex-direction: column;
@@ -26,3 +29,10 @@
 .toto-icon-button.m .icon, .toto-icon-button.m .icon svg {width: 14px; height: 14px;}
 .toto-icon-button.ms .icon, .toto-icon-button.ms .icon svg {width: 11px; height: 11px;}
 .toto-icon-button.s .icon, .toto-icon-button.s .icon svg {width: 8px; height: 8px;}
+
+.toto-icon-button-container .label {
+  margin-top: 9px;
+  color: #ffeb3b;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}

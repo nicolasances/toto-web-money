@@ -22,7 +22,8 @@
   display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
 .toto-list-avatar .icon svg {
-  fill: rgba(0,0,0,0.6);
+  /* fill: rgba(0,0,0,0.6); */
+  fill: currentColor;
 }
 .toto-list-avatar.selected .icon  svg{
   fill: #00acc1;
