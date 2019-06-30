@@ -5,6 +5,10 @@
   flex-direction: row;
 }
 
+.dashboard-screen .step1, .dashboard-screen .step2 {
+  display: flex; flex: 1; flex-direction: column; justify-content: center; align-items: center;
+}
+
 /* Sections */
 .dashboard-screen .upload-section {
   display: flex;
@@ -46,12 +50,11 @@
   flex-direction: row;
   justify-content: flex-end;
 }
-.dashboard-screen .upload-section .upload-bar-container .bank-selector-container {
+.dashboard-screen .bank-selector-container {
   display: flex;
-  flex: 1;
   flex-direction: row;
   justify-content: flex-start;
-  margin-left: 12px;
+  margin-top: 24px;
 }
 
 /* Instructions  */

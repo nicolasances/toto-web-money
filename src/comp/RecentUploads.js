@@ -91,7 +91,7 @@ export default class RecentUploads extends Component {
         yearMonth: moment(item.yearMonth + '01', 'YYYYMMDD').format('MMM YY')
       },
       title: item.count + ' expenses',
-      amount: '€ ' + item.total
+      amount: '€ ' + item.total.toFixed(2)
     }
 
   }

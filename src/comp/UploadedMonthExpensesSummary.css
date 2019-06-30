@@ -1,0 +1,30 @@
+
+.uploaded-month-expenses-summary {
+  display: flex; flex-direction: row;
+  max-height: 90vh;
+}
+
+.uploaded-month-expenses-summary .title {
+  font-size: 1.3em;
+  text-align: left;
+}
+.uploaded-month-expenses-summary .subtitle {
+  font-size: 1em !important;
+  margin: 0 !important;
+}
+
+.uploaded-month-expenses-summary .left-list {
+  display: flex; flex: 1; flex-direction: column;
+  padding: 12px;
+  border-right: 1px solid #5ddef4;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.uploaded-month-expenses-summary .right-list {
+  display: flex; flex: 1; flex-direction: column;
+  padding: 12px;
+  background-color: #26acc1;
+  color: rgba(0,0,0,0.7);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

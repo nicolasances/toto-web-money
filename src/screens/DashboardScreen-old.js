@@ -6,7 +6,6 @@ import Cookies from 'universal-cookie';
 import TotoDropzone from '../comp/TotoDropzone';
 import ExpensesUploadedData from '../comp/ExpensesUploadedData';
 import UploadedMonthDetail from '../comp/UploadedMonthDetail';
-import UploadedData from '../comp/UploadedData';
 import RecentUploads from '../comp/RecentUploads';
 import BankSelector from '../comp/BankSelector';
 import ExpensesAPI from '../services/ExpensesAPI';
@@ -25,39 +24,16 @@ export default class DashboardScreen extends Component { 
       bankChoiceVisible: false,
       uploading: false,
       user: cookies.get('user'),
-      step: 1
     }
 
     this.onConfirmUpload = this.onConfirmUpload.bind(this);
     this.onSelectBank = this.onSelectBank.bind(this);
     this.onFileUploadReset = this.onFileUploadReset.bind(this);
     this.onCancelUploadedData = this.onCancelUploadedData.bind(this);
-    this.onUploadingMonth = this.onUploadingMonth.bind(this);
     this.sendFile = this.sendFile.bind(this);
     this.clearState = this.clearState.bind(this);
     this.onUploadSelected = this.onUploadSelected.bind(this);
     this.resetSelectedMonth = this.resetSelectedMonth.bind(this);
-    this.nextStep = this.nextStep.bind(this);
-    this.checkMonthUploadStatus = this.checkMonthUploadStatus.bind(this);
-    this.setMonthUploading = this.setMonthUploading.bind(this);
-  }
-
-  /**
-   * The component has been mounted
-   */
-  componentDidMount() {
-
-    TotoEventBus.subscribeToEvent(config.EVENTS.expensesUploadConfirmed, this.onUploadingMonth);
-
-  }
-
-  /**
-   * The component has been mounted
-   */
-  componentWillUnmount() {
-
-    TotoEventBus.unsubscribeToEvent(config.EVENTS.expensesUploadConfirmed, this.onUploadingMonth);
-
   }
 
   /**
@@ -72,13 +48,13 @@ export default class DashboardScreen extends Component { 
         setTimeout(() => {
 
           // Update the state, setting the uploaded data
-          this.setState({uploading: false, uploadedData: data}, this.nextStep);
+          this.setState({uploading: false, uploadedData: data});
 
           // Fire an event (file uploaded)
           TotoEventBus.publishEvent({name: config.EVENTS.expensesFileUploaded});
 
           // Clear uploaded data after a bit
-          // setTimeout(this.clearState, 30000);
+          setTimeout(this.clearState, 30000);
 
         }, 1000);
 
@@ -112,75 +88,10 @@ export default class DashboardScreen extends Component { 
   }
 
   /**
-   * When a month is being uploaded
-   */
-  onUploadingMonth(event) {
-
-    // Set the month as "UPLOADING"
-    this.setMonthUploading(event.context.monthId, true);
-
-    // Start polling for the end of it
-    setTimeout(() => {this.checkMonthUploadStatus(event.context.monthId)}, 100)
-
-  }
-
-  /**
-   * Checks the upload status of the expenses of the month
-   */
-  checkMonthUploadStatus(monthId) {
-
-    new ExpensesAPI().getUploadStatus(monthId).then((data) => {
-
-      let done = true;
-
-      // Check if any expense is still pending
-      for (var i = 0 ; i < data.status.length; i++) {
-        if (data.status[i].status !== 'OK') done = false;
-      }
-
-      // If still pending, keep polling
-      if (!done) setTimeout(() => {this.checkMonthUploadStatus(monthId)}, 500);
-      // Otherwise, update the month
-      else this.setMonthUploading(monthId, false);
-
-    })
-
-  }
-
-  /**
-   * Updates the month as uploading or not, based on the params
-   */
-  setMonthUploading(monthId, uploading) {
-
-    for (var i = 0 ; i < this.state.uploadedData.months.length ; i++) {
-
-      let month = this.state.uploadedData.months[i];
-
-      if (month.id === monthId) {
-
-        // Set the month uploading status
-        month.uploading = uploading;
-
-        let months = this.state.uploadedData.months;
-        months.splice(i, 1, month);
-
-        // Update the state
-        this.setState({uploadedData: {
-          months: [...months]
-        }});
-
-      }
-    }
-
-  }
-
-  /**
    * When the upload is confirmed, show the "bank" buttons
    */
   onConfirmUpload(files) {
-
-    this.setState({files: files, bankChoiceVisible: true});
-
+    this.setState({bankChoiceVisible: true, files: files});
   }
 
   /**
@@ -233,15 +144,6 @@ export default class DashboardScreen extends Component { 
 
   }
 
-  /**
-   * Goes to the next step of the process
-   */
-  nextStep() {
-
-    this.setState((state) => ({step: state.step + 1}));
-
-  }
-
   render() {
 
     // Bank choice buttons
@@ -275,25 +177,24 @@ export default class DashboardScreen extends Component { 
     let instructionsContainerClass = 'instructions-container';
     if (this.state.uploadedData) instructionsContainerClass += ' visible';
 
-    // Steps of the workflow
-    let step;
-    if (this.state.step == 1) step = (
-      <div className="step1">
-        <TotoDropzone onConfirmedUpload={this.onConfirmUpload} uploading={this.state.uploading} onReset={this.onFileUploadReset}/>
-        {bankSelector}
-      </div>
-    )
-    else if (this.state.step == 2) step = (
-      <div className="step2">
-        <UploadedData data={this.state.uploadedData} />
-      </div>
-    )
-
     return (
       <div className="TotoScreen dashboard-screen">
+        <div className="upload-section">
+          <div style={{margin: '12px 0', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+            <TotoDropzone onConfirmedUpload={this.onConfirmUpload} uploading={this.state.uploading} onReset={this.onFileUploadReset}/>
+          </div>
+          <div style={{margin: '12px 0', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+            {bankSelector}
+          </div>
+          <div className={instructionsContainerClass}>
+            {instructions}
+          </div>
 
-        {step}
-
+          {selectedUploadedMonth}
+        </div>
+        <div className="recent-uploads-section">
+          <RecentUploads onItemPress={this.onUploadSelected} />
+        </div>
       </div>
     )
   }

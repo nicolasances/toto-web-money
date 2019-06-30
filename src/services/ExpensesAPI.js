@@ -81,6 +81,15 @@ export default class ExpensesAPI {
   }
 
   /**
+   * Retrieves the status of the upload
+   */
+  getUploadStatus(monthId) {
+
+    return new TotoAPI().fetch('/react/expenses/impoco/uploads/' + monthId + '/status').then((response) => response.json());
+
+  }
+
+  /**
    * Deletes all uploads
    */
   deleteAllUploads(userEmail) {
@@ -173,6 +182,17 @@ export default class ExpensesAPI {
   getExpenses(userEmail, yearMonth) {
 
     return new TotoAPI().fetch('/expenses/expenses?yearMonth=' + yearMonth + '&sortDate=true&sortDesc=true&user=' + userEmail)
+        .then((response) => response.json());
+
+  }
+
+  /**
+   * Finds expenses with the specified tag
+   * Tag has to be formatted as a string tagName:tagValue (e.g. tag = source:bank-statement)
+   */
+  getExpensesWithTag(userEmail, tag) {
+
+    return new TotoAPI().fetch('/expenses/expenses?sortDate=true&sortDesc=true&user=' + userEmail + '&tag=' + tag)
         .then((response) => response.json());
 
   }
