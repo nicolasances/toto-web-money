@@ -1,0 +1,23 @@
+
+.expenses-import-flow-step {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.expenses-import-flow-step.current {color: #ffeb3b;}
+.expenses-import-flow-step.done {opacity: 0.4;}
+
+.expenses-import-flow-step .step {
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  font-size: 2em;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+}
+
+.expenses-import-flow-step .label {
+  margin-top: 6px;
+}

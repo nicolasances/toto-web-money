@@ -1,0 +1,20 @@
+
+.expenses-import-flow {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  color: #5ddef3;
+}
+
+.expenses-import-flow .separator {
+  border-bottom: 2px dashed currentColor;
+  flex: 1;
+  margin: 0 12px;
+  height: 0;
+}
+.expenses-import-flow .separator.done {opacity: 0.4;}
+
+.expenses-import-flow .pad {
+  flex: 1;
+}

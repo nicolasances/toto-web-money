@@ -4,6 +4,7 @@ import './DashboardScreen.css';
 import Cookies from 'universal-cookie';
 
 import TotoDropzone from '../comp/TotoDropzone';
+import TotoIconButton from '../comp/TotoIconButton';
 import ExpensesUploadedData from '../comp/ExpensesUploadedData';
 import UploadedMonthDetail from '../comp/UploadedMonthDetail';
 import UploadedData from '../comp/UploadedData';
@@ -11,6 +12,7 @@ import RecentUploads from '../comp/RecentUploads';
 import BankSelector from '../comp/BankSelector';
 import ExpensesAPI from '../services/ExpensesAPI';
 import TotoEventBus from '../services/TotoEventBus';
+import ExpensesImportFlow from '../widgets/ExpensesImportFlow';
 import * as config from '../Config';
 
 const cookies = new Cookies();
@@ -94,7 +96,7 @@ export default class DashboardScreen extends Component { 
   clearState() {
 
     // Remove the uploaded data
-    this.setState({uploadedData: null});
+    this.setState({uploadedData: null, step: 1});
 
     // Reset the upload button
     this.onFileUploadReset();
@@ -179,7 +181,7 @@ export default class DashboardScreen extends Component { 
    */
   onConfirmUpload(files) {
 
-    this.setState({files: files, bankChoiceVisible: true});
+    this.setState({files: files, bankChoiceVisible: true}, this.nextStep);
 
   }
 
@@ -252,19 +254,6 @@ export default class DashboardScreen extends Component { 
       </div>
     )
 
-    // Upload successfull + instructions message
-    let instructions;
-    if (this.state.uploadedData) instructions = (
-      <div className="instructions">
-        <div className="title">File uploaded successfully!</div>
-        <div className="message">
-          <p>In the panel on the right, you'll now find the data that has been uploaded.</p>
-          <p>Those are the expenses contained in the file, <b>grouped in months.</b></p>
-          <p>Select a month to open the review panel. From the review panel you'll be able to confirm the expenses and import them into Toto.</p>
-        </div>
-      </div>
-    )
-
     // Selected uploaded month (selected from the recent uploads)
     let selectedUploadedMonth;
     if (this.state.selectedMonth) selectedUploadedMonth = (
@@ -277,13 +266,13 @@ export default class DashboardScreen extends Component { 
 
     // Steps of the workflow
     let step;
-    if (this.state.step == 1) step = (
+    if (this.state.step == 1 || this.state.step == 2) step = (
       <div className="step1">
         <TotoDropzone onConfirmedUpload={this.onConfirmUpload} uploading={this.state.uploading} onReset={this.onFileUploadReset}/>
         {bankSelector}
       </div>
     )
-    else if (this.state.step == 2) step = (
+    else if (this.state.step == 3) step = (
       <div className="step2">
         <UploadedData data={this.state.uploadedData} />
       </div>
@@ -291,6 +280,12 @@ export default class DashboardScreen extends Component { 
 
     return (
       <div className="TotoScreen dashboard-screen">
+
+        <div className="header">
+          <div className="left"> <TotoIconButton image={require('../img/question.svg')} marginHorizontal={48} label="Help" /> </div>
+          <div className="center"> <ExpensesImportFlow step={this.state.step} /> </div>
+          <div className="right"> <TotoIconButton image={require('../img/reload.svg')} onPress={this.clearState} size="l" marginHorizontal={48} label="Restart" /> </div>
+        </div>
 
         {step}
 
