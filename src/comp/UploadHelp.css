@@ -1,0 +1,16 @@
+
+.upload-help { display: flex; flex-direction: column; padding: 12px; }
+
+.upload-help .title { font-size: 1.6em; }
+.upload-help .subtitle { font-size: 1.3em; margin-bottom: 12px;}
+
+.upload-help .step { display: flex; flex-direction: row; margin: 12px 0;}
+.upload-help .text-container { display: flex; flex-direction: column; margin-left: 12px;}
+
+.upload-help .step .num {
+  display: flex; flex-direction: row; justify-content: center; align-items: center;
+  font-size: 1.6em; width: 24px; min-width: 24px; height: 24px; border-radius: 50%; border: 3px solid currentColor;
+}
+
+.upload-help .text-container .text { font-size: 1em; }
+.upload-help .text-container .text.small { font-size: 0.8em; margin-top: 3px; }

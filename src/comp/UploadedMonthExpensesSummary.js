@@ -63,7 +63,7 @@ export default class UploadedMonthExpensesSummary extends Component {
 
     return {
       title: item.expense.description,
-      amount: currency + ' ' + item.expense.amount.toFixed(2),
+      amount: currency + ' ' + item.expense.amount.toLocaleString('it'),
       avatar: {type: 'image', value: categoryImg, size: 'l'},
       date: {date: item.expense.date}
     }
@@ -83,7 +83,7 @@ export default class UploadedMonthExpensesSummary extends Component {
 
     return {
       title: item.description,
-      amount: currency + ' ' + item.amount.toFixed(2),
+      amount: currency + ' ' + item.amount.toLocaleString('it'),
       avatar: {type: 'image', value: categoryImg, size: 'l'},
       date: {date: item.date}
     }

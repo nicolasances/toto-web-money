@@ -86,11 +86,16 @@ export default class UploadedData extends Component {
     let avatarImg;
     if (item.uploading === false) avatarImg = require('../img/tick.svg');
 
+    // Currency
+    let currency = '€';
+    console.log(item);
+    if (item.currency === 'DKK') currency = 'kr.';
+
     return {
       avatar: {type: 'image', value: avatarImg},
       title: moment(item.yearMonth + '01', 'YYYYMMDD').format('MMMM YYYY'),
       highlights: highlights,
-      amount: item.total.toFixed(2)
+      amount: currency + ' ' + item.total.toLocaleString('it')
     }
 
   }

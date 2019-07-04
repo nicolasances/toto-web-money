@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import './TotoScreen.css';
 import './DashboardScreen.css';
 import Cookies from 'universal-cookie';
+import Popup from 'reactjs-popup';
 
 import TotoDropzone from '../comp/TotoDropzone';
 import TotoIconButton from '../comp/TotoIconButton';
 import ExpensesUploadedData from '../comp/ExpensesUploadedData';
+import UploadHelp from '../comp/UploadHelp';
 import UploadedMonthDetail from '../comp/UploadedMonthDetail';
 import UploadedData from '../comp/UploadedData';
 import RecentUploads from '../comp/RecentUploads';
@@ -25,6 +27,7 @@ export default class DashboardScreen extends Component { 
     this.state = {
       files: [],
       bankChoiceVisible: false,
+      openHelpPopup: false,
       uploading: false,
       user: cookies.get('user'),
       step: 1
@@ -35,12 +38,14 @@ export default class DashboardScreen extends Component { 
     this.onFileUploadReset = this.onFileUploadReset.bind(this);
     this.onCancelUploadedData = this.onCancelUploadedData.bind(this);
     this.onUploadingMonth = this.onUploadingMonth.bind(this);
+    this.onHelp = this.onHelp.bind(this);
     this.sendFile = this.sendFile.bind(this);
     this.clearState = this.clearState.bind(this);
     this.onUploadSelected = this.onUploadSelected.bind(this);
     this.resetSelectedMonth = this.resetSelectedMonth.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.checkMonthUploadStatus = this.checkMonthUploadStatus.bind(this);
+    this.closeHelpPopup = this.closeHelpPopup.bind(this);
     this.setMonthUploading = this.setMonthUploading.bind(this);
   }
 
@@ -244,6 +249,21 @@ export default class DashboardScreen extends Component { 
 
   }
 
+  /**
+   * On the click of the help button
+   * Show the help dialog
+   */
+  onHelp() {
+    this.setState({openHelpPopup: true});
+  }
+
+  /**
+   * Closes the popup with the help
+   */
+  closeHelpPopup() {
+    this.setState({openHelpPopup: false});
+  }
+
   render() {
 
     // Bank choice buttons
@@ -282,12 +302,26 @@ export default class DashboardScreen extends Component { 
       <div className="TotoScreen dashboard-screen">
 
         <div className="header">
-          <div className="left"> <TotoIconButton image={require('../img/question.svg')} marginHorizontal={48} label="Help" /> </div>
+          <div className="left"> <TotoIconButton image={require('../img/question.svg')} marginHorizontal={48} label="Help" onPress={this.onHelp} /> </div>
           <div className="center"> <ExpensesImportFlow step={this.state.step} /> </div>
           <div className="right"> <TotoIconButton image={require('../img/reload.svg')} onPress={this.clearState} size="l" marginHorizontal={48} label="Restart" /> </div>
         </div>
 
         {step}
+
+        <Popup
+          on='click'
+          offsetX={48}
+          open={this.state.openHelpPopup}
+          onClose={this.closeHelpPopup}
+          overlayStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
+          contentStyle={{padding: 0, backgroundColor: '#007c91', borderRadius: '3px', border: 'none', boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'}}
+          arrow={false}
+          >
+
+          <UploadHelp />
+
+        </Popup>
 
       </div>
     )

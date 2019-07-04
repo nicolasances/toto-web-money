@@ -42,7 +42,7 @@ export default class BankSelector extends Component {
         <div className="label">{label}</div>
         <div className="buttons-container">
           <BankButton text="UniC" onPress={() => {this.select("uc")}} selected={this.state.selectedBank === 'uc'}/>
-          <BankButton text="Danske" onPress={() => {this.select("db")}} selected={this.state.selectedBank === 'db'}/>
+          <BankButton text="Danske" onPress={() => {this.select("danske")}} selected={this.state.selectedBank === 'danske'}/>
         </div>
       </div>
     )
