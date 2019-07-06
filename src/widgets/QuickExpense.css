@@ -21,6 +21,7 @@
 .quick-expense .input-container.grow {
   flex: 1
 }
+.quick-expense .input-container.grow input[type='text'] {width: 90% !important;}
 .quick-expense .input-container.margined {
   margin-right: 24px;
 }

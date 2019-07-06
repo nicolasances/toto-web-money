@@ -7,6 +7,7 @@ import './TotoInput.css';
  * Properties:
  * - placeholder              : (optional) a placeholder text, removed when the user focuses on the input field
  * - color                    : (optioanl) overrides the text color
+ * - onPressEnter             : (optional) callback when the enter key is pressed
  */
 export default class TotoInput extends Component {
 
@@ -14,29 +15,33 @@ export default class TotoInput extends Component {
     super(props);
 
     this.state = {
-      value: props.value ? props.value : '',
       placeholder: props.placeholder
     }
 
     // Binding
-    this.onPress = this.onPress.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onFocus = this.onFocus.bind(this);
-  }
-
-  /**
-   * When pressing
-   */
-  onPress() {
-    this.setState({placeholder: ''})
+    this.onKeyPress = this.onKeyPress.bind(this);
   }
 
   /**
    * When focusing
    */
   onFocus() {
-    this.setState({placeholder: ''})
+    this.setState({placeholder: '', focused: true})
+  }
+
+  /**
+   * When blurring
+   */
+  onBlur() {
+
+    let placeholder = '';
+    if (this.props.value == null || this.props.value === '') placeholder = this.props.placeholder;
+
+    this.setState({placeholder: placeholder, focused: false});
+
   }
 
   /**
@@ -49,14 +54,16 @@ export default class TotoInput extends Component {
   }
 
   /**
-   * When blurring
+   * When a keyboard key is pressed
    */
-  onBlur() {
+  onKeyPress(e) {
 
-    let placeholder = '';
-    if (this.state.value === '' || this.state.value > 0) placeholder = this.props.placeholder;
-
-    this.setState({placeholder: placeholder});
+    if (e.key === 'Enter') {
+      // Callback if any
+      if (this.props.onPressEnter) this.props.onPressEnter();
+      // Remove the focus
+      e.target.blur();
+    }
 
   }
 
@@ -66,12 +73,13 @@ export default class TotoInput extends Component {
     // Input text classes
     let inputClass = 'text-input';
     // Placeholder class
-    if (!this.state.value || this.state.value === '') inputClass += ' placeholder';
+    if (!this.props.value || this.props.value === '') inputClass += ' placeholder';
     // Size
     inputClass += ' ' + (this.props.size ? this.props.size : 'm')
 
-    // Value
-    let value = (this.state.value !== '') ? this.state.value : this.state.placeholder
+    // Value & Placeholder
+    let placeholder = this.state.placeholder ? this.state.placeholder : (this.state.focused ? this.state.placeholder : this.props.placeholder)
+    let value = (this.props.value !== '' && this.props.value != null) ? this.props.value : placeholder
 
     // Additional text styles
     let textStyles = {};
@@ -82,7 +90,7 @@ export default class TotoInput extends Component {
 
     return (
       <div className="toto-input" onClick={this.onPress}>
-        <input type="text" style={textStyles} className={inputClass} value={value} onFocus={this.onFocus} onChange={this.onChange} onBlur={this.onBlur}/>
+        <input type="text" style={textStyles} className={inputClass} value={value} onKeyPress={this.onKeyPress} onFocus={this.onFocus} onChange={this.onChange} onBlur={this.onBlur}/>
       </div>
     )
   }

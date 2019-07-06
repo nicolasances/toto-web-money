@@ -43,6 +43,7 @@ export default class GraphTopCategoriesOfMonth extends Component {
     // Subscriptions
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseDeleted, this.onExpenseCreated);
 
   }
 
@@ -51,6 +52,7 @@ export default class GraphTopCategoriesOfMonth extends Component {
     // Subscriptions
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseDeleted, this.onExpenseCreated);
   }
 
   /**
@@ -160,7 +162,7 @@ export default class GraphTopCategoriesOfMonth extends Component {
           valueImage={this.valueImage}
           margins={{horizontal: 24, vertical: 12}}
           />
-        <div className='title'></div>
+        <div className='title'>Spending categories of the month</div>
       </div>
     )
   }

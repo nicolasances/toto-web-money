@@ -22,6 +22,17 @@ export default class ExpensesAPI {
   }
 
   /**
+   * Deletes the expense
+   */
+  deleteExpense(id) {
+
+    return new TotoAPI().fetch('/expenses/expenses/' + id, {
+      method: 'DELETE'
+    }).then((response => response.json()));
+
+  }
+
+  /**
    * Updates an expense
    */
   putExpense(exId, ex) {

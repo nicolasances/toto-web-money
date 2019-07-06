@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
 
 import TotoList from './TotoList';
 import ExpensesAPI from '../services/ExpensesAPI';
-import TotoEventBus from '../services/TotoEventBus';
-import * as config from '../Config';
 import categoriesMap from '../services/CategoriesMap';
 
 import './UploadedMonthExpensesSummary.css';

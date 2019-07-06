@@ -4,6 +4,7 @@ import moment from 'moment';
 import Popup from 'reactjs-popup';
 
 import MonthNavigator from '../comp/MonthNavigator';
+import CategorySelectionPopup from '../comp/CategorySelectionPopup';
 import ExpenseDetail from '../comp/ExpenseDetail';
 import ExpensesAPI from '../services/ExpensesAPI';
 import TotoList from '../comp/TotoList';
@@ -29,8 +30,11 @@ export default class ExpensesListWidget extends Component {
     this.dataExtractor = this.dataExtractor.bind(this);
     this.onMonthChange = this.onMonthChange.bind(this);
     this.onExpenseCreated = this.onExpenseCreated.bind(this);
+    this.onExpenseChanged = this.onExpenseChanged.bind(this);
     this.onReconcilePress = this.onReconcilePress.bind(this);
+    this.onSelectCategory = this.onSelectCategory.bind(this);
     this.openDetailPopup = this.openDetailPopup.bind(this);
+    this.openCategoryPopup = this.openCategoryPopup.bind(this);
     this.closeDetailPopup = this.closeDetailPopup.bind(this);
     this.selectExpense = this.selectExpense.bind(this);
     this.reload = this.reload.bind(this);
@@ -71,6 +75,24 @@ export default class ExpensesListWidget extends Component {
   }
 
   /**
+   * React when selecting a category for a list item
+   */
+  onSelectCategory(category) {
+
+    if (!this.state.selectedItem) return;
+
+    // Update calling the API
+    new ExpensesAPI().putExpense(this.state.selectedItem.id, {category: category}).then((data) => {
+      // Event
+      TotoEventBus.publishEvent({name: config.EVENTS.expenseUpdated, context: {expense: this.state.selectedItem}});
+    });
+
+    // CLose the popup
+    this.setState({categoryPopupOpen: false});
+
+  }
+
+  /**
    * When the month changes, reload
    */
   onMonthChange(yearMonth) {
@@ -84,6 +106,19 @@ export default class ExpensesListWidget extends Component {
    */
   onExpenseCreated(event) {
 
+    this.reload();
+
+  }
+
+  /**
+   * When an expense is changed
+   */
+  onExpenseChanged(event) {
+
+    // Close the popup
+    this.setState({openDetailPopup: false});
+
+    // Reload
     this.reload();
 
   }
@@ -122,6 +157,13 @@ export default class ExpensesListWidget extends Component {
    */
   closeDetailPopup() {
     this.setState({openDetailPopup: false});
+  }
+
+  /**
+   * Shows the change category popup
+   */
+  openCategoryPopup(item) {
+    this.setState({categoryPopupOpen: true, selectedCategory: item.category, selectedItem: item});
   }
 
   /**
@@ -171,6 +213,7 @@ export default class ExpensesListWidget extends Component {
             data={this.state.expenses}
             dataExtractor={this.dataExtractor}
             onPress={this.selectExpense}
+            onAvatarClick={this.openCategoryPopup}
             />
         </div>
 
@@ -180,12 +223,24 @@ export default class ExpensesListWidget extends Component {
           open={this.state.openDetailPopup}
           onClose={this.closeDetailPopup}
           overlayStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
-          contentStyle={{padding: 0, backgroundColor: '#007c91', borderRadius: '3px', border: 'none', boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'}}
+          contentStyle={{width: 'auto', padding: 0, backgroundColor: '#007c91', borderRadius: '3px', border: 'none', boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'}}
           arrow={false}
           >
 
-            <ExpenseDetail expense={this.state.selectedExpense} />
+            <ExpenseDetail expense={this.state.selectedExpense} onDeleted={this.onExpenseChanged} onSaved={this.onExpenseChanged} />
 
+        </Popup>
+
+        <Popup
+          closeOnDocumentClick={true}
+          closeOnEscape={true}
+          open={this.state.categoryPopupOpen}
+          onClose={() => {this.setState({categoryPopupOpen: false})}}
+          overlayStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
+          contentStyle={{backgroundColor: '#007c91', borderRadius: '3px', border: 'none', boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'}}
+          arrow={false}
+          >
+          <CategorySelectionPopup category={this.state.selectedCategory} onCategoryChange={this.onSelectCategory}/>
         </Popup>
 
       </div>

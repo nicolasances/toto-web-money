@@ -9,6 +9,7 @@ import './TotoCurrencySelector.css';
  * Currency selector for Toto
  * Properties:
  * - initialValue             : initial value of the currency (e.g. 'EUR')
+ * - onChange                 : (optional) callback when the currency is changed
  */
 export default class TotoCurrencySelector extends Component {
 
@@ -29,7 +30,7 @@ export default class TotoCurrencySelector extends Component {
    */
   selectCurrency(c) {
 
-    this.setState({value: c, changed: true});
+    this.setState({value: c, changed: true, popupOpen: false});
 
     if (this.props.onChange) this.props.onChange(c);
 
@@ -41,17 +42,18 @@ export default class TotoCurrencySelector extends Component {
     displayedClass += ' ' + (this.props.size ? this.props.size : 'm');
 
     let displayedCurrency = (
-      <div className={displayedClass}>
+      <div className={displayedClass} onClick={() => {this.setState({popupOpen: true})}}>
         {this.state.value}
       </div>
     )
 
     return (
       <div className='toto-currency-selector'>
+        {displayedCurrency}
         <Popup
-          trigger={displayedCurrency}
-          on='click'
+          open={this.state.popupOpen}
           position='top center'
+          onClose={() => {this.setState({popupOpen: false})}}
           closeOnDocumentClick={true}
           closeOnEscape={true}
           overlayStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}

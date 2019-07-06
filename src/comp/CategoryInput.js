@@ -11,7 +11,7 @@ import './CategoryInput.css';
 /**
  * Currency selector for Toto
  * Properties:
- * - initialValue             : initial value of the currency (e.g. 'EUR')
+ * - showLabel                : shows the label (default, true)
  */
 export default class CategoryInput extends Component {
 
@@ -64,12 +64,16 @@ export default class CategoryInput extends Component {
     // Image to be loaded
     let category = categoryMap.get(this.state.value);
 
+    // Label
+    let label = (<div className='label'>{category.label}</div>);
+    if (this.props.showLabel === false) label = null;
+
     return (
       <div>
 
         <TouchableOpacity className={categoryInputClass} onPress={this.openPopup}>
           <div className='icon'><SVG src={category.image} /></div>
-          <div className='label'>{category.label}</div>
+          {label}
         </TouchableOpacity>
 
         <Popup

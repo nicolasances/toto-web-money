@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
-import moment from 'moment';
-import Popup from 'reactjs-popup';
-
-import TotoEventBus from '../services/TotoEventBus';
-import * as config from '../Config';
 
 import './ExpensesImportFlowStep.css';
 

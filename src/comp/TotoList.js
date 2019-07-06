@@ -131,7 +131,7 @@ class Item extends Component {
       }
       // Image
       else if (data.avatar.type === 'image') {
-        avatar = (<TotoListAvatar image={data.avatar.value} size={avatarSize} />)
+        avatar = (<TotoListAvatar image={data.avatar.value} size={avatarSize} onPress={this.onItemAvatarClick} />)
       }
       // Select
       else if (data.avatar.type === 'select') {

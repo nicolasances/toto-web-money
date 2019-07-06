@@ -7,6 +7,8 @@ import TotoLineChart from '../comp/TotoLineChart';
 import TotoEventBus from '../services/TotoEventBus';
 import * as config from '../Config';
 
+import './GraphPastDaysExpenses.css';
+
 const cookies = new Cookies();
 
 export default class GraphPastDaysExpenses extends Component {
@@ -20,6 +22,7 @@ export default class GraphPastDaysExpenses extends Component {
 
     this.xAxisTransform = this.xAxisTransform.bind(this);
     this.onExpenseCreated = this.onExpenseCreated.bind(this);
+    this.onExpenseDeleted = this.onExpenseDeleted.bind(this);
 
   }
 
@@ -33,6 +36,7 @@ export default class GraphPastDaysExpenses extends Component {
     // Subscriptions
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseDeleted, this.onExpenseDeleted);
   }
 
   componentWillUnmount() {
@@ -40,12 +44,22 @@ export default class GraphPastDaysExpenses extends Component {
     // Subscriptions
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseDeleted, this.onExpenseDeleted);
   }
 
   /**
    * When an expense is created, reload
    */
   onExpenseCreated(event) {
+
+    this.loadPastDaysSpending();
+
+  }
+
+  /**
+   * When an expense is created, reload
+   */
+  onExpenseDeleted(event) {
 
     this.loadPastDaysSpending();
 
@@ -168,6 +182,7 @@ export default class GraphPastDaysExpenses extends Component {
   render() {
     return (
       <div className="graph-past-days-expenses">
+        <div className="title">Spending of the past 15 days</div>
         <TotoLineChart
             data={this.state.preparedData}
             maxHeight={100}

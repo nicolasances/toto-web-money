@@ -194,7 +194,10 @@ export default class TotoBarChart extends Component {
 
       if (xLabelHeight + size + 6 >= this.y(item.y)) posy = valueLabelPos - this.fontScale(data.length) - 18;
 
-      return (<SVG key={'TotoBarImg-' + index} style={{position: 'absolute', color: color, left: posx, top: posy, width: size + 'px', height: size + 'px'}} src={this.props.valueImage(item, index)} className='image'/>)
+      let img = this.props.valueImage(item, index);
+      if (img == null) img = require('../img/question.svg');
+
+      return (<SVG key={'TotoBarImg-' + index} style={{position: 'absolute', color: color, left: posx, top: posy, width: size + 'px', height: size + 'px'}} src={img} className='image'/>)
     });
 
     return images;

@@ -47,6 +47,7 @@ export default class GraphPastMonthsExpenses extends Component {
     // Subscriptions
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
     TotoEventBus.subscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
+    TotoEventBus.subscribeToEvent(config.EVENTS.expenseDeleted, this.onExpenseCreated);
 
   }
 
@@ -55,6 +56,7 @@ export default class GraphPastMonthsExpenses extends Component {
     // Subscriptions
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseCreated, this.onExpenseCreated);
     TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseUpdated, this.onExpenseCreated);
+    TotoEventBus.unsubscribeToEvent(config.EVENTS.expenseDeleted, this.onExpenseCreated);
   }
 
   /**
@@ -154,6 +156,7 @@ export default class GraphPastMonthsExpenses extends Component {
   render() {
     return (
       <div className='graph-past-months-expenses'>
+        <div className="title">Past months spending</div>
         <TotoBarChart
           data={this.state.preparedData}
           xAxisTransform={this.xAxisTransform}
