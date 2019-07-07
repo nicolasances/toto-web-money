@@ -1,6 +1,8 @@
 
-export const API_URL = 'https://imatzdev.it/apis';
-export const AUTH = 'Basic c3RvOnRvdG8=';
+import {apiUrl, auth} from './env.js';
+
+export const API_URL = apiUrl;
+export const AUTH = auth;
 
 export const EVENTS = {
   expenseCreated: 'expenseCreated', // Expense has been created
