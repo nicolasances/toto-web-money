@@ -4,7 +4,8 @@ RUN npm install -g serve
 
 COPY . /app/
 
-RUN ls /app
-RUN npm run build --prefix /app
+WORKDIR /app
+RUN npm install
+RUN npm run build
 
 CMD serve -s /app/build
