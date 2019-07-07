@@ -8,4 +8,4 @@ WORKDIR /app
 RUN npm install
 RUN npm run build
 
-CMD serve -s /app/build
+CMD serve -s /app/build -l 80
