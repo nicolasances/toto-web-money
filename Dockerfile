@@ -12,6 +12,7 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /app
 
+RUN npm install
 RUN npm run build
 
 RUN cp /app/build /www
