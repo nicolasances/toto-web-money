@@ -1,11 +1,17 @@
-FROM node:8.9.4-alpine
+FROM nginx:1.17.1-alpine
 
-RUN npm install -g serve
+RUN apk update
+RUN apk upgrade
+RUN apk add npm
 
-COPY . /app/
+RUN mkdir /app
+RUN mkdir /www
+
+COPY . /app
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /app
-RUN npm install
+
 RUN npm run build
 
-CMD serve -s /app/build -l 80
+RUN cp /app/build /www
