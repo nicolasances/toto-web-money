@@ -105,7 +105,7 @@ class App extends Component {
 
 
     return (
-      <Router>
+      <Router basename="/money">
         {content}
       </Router>
     );
