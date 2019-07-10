@@ -2,7 +2,7 @@
   "name": "toto-money",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://imatzdev.it/money/",
+  "homepage": "./",
   "dependencies": {
     "d3": "^5.9.2",
     "moment": "^2.24.0",
