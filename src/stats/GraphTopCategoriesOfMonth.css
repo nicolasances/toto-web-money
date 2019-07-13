@@ -1,3 +1,3 @@
 
 .graph-top-categories-of-month { display: flex; flex-direction: column;}
-.graph-top-categories-of-month .title { opacity: 0.8; font-size: 1.1em; text-align: center;}
+.graph-top-categories-of-month .title { opacity: 0.8; font-size: 1.1em; text-align: center; margin-top: 6px;}
