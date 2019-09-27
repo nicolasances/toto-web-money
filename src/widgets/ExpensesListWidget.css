@@ -12,10 +12,9 @@
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.expenses-list-widget .header { display: flex; flex-direction: column; align-items: center; }
+.expenses-list-widget .header { display: flex; flex-direction: column; align-items: center; margin-bottom: 12px; }
 .expenses-list-widget .header .title { font-size: 10px; margin-bottom: 12px; }
 
 .expenses-list-widget .body {
   display: flex; flex: 1; flex-direction: column;
-  margin-top: 12px;
 }
