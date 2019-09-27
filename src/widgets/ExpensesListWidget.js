@@ -204,11 +204,11 @@ export default class ExpensesListWidget extends Component {
   render() {
     return (
       <div className='expenses-list-widget'>
-        <div className='header'>
-          <div className='title'>Your expenses, month of</div>
-          <MonthNavigator onMonthChange={this.onMonthChange} />
-        </div>
         <div className='body'>
+          <div className='header'>
+            <div className='title'>Your expenses, month of</div>
+            <MonthNavigator onMonthChange={this.onMonthChange} />
+          </div>
           <TotoList
             data={this.state.expenses}
             dataExtractor={this.dataExtractor}
