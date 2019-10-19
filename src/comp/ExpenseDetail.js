@@ -39,7 +39,9 @@ export default class ExpenseDetail extends Component {
   /**
    * On changes, update state
    */
-  onChangeDate(date) {this.setState({expense: {...this.state.expense, date: date}})}
+  onChangeDate(date) {
+    this.setState({expense: {...this.state.expense, date: date, yearMonth: date.substring(0, 6)}})
+  }
   onChangeAmount(amount) {this.setState({expense: {...this.state.expense, amount: amount}})}
   onChangeCurrency(c) {this.setState({expense: {...this.state.expense, currency: c}})}
   onChangeDescription(d) {this.setState({expense: {...this.state.expense, description: d}})}
